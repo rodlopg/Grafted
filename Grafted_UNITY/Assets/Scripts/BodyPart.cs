@@ -1,16 +1,20 @@
 using UnityEngine;
 
-public class BodyPart : MonoBehaviour
-{
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+public class BodyPart {
+    private PlayerState.PlayerLimb slot;
+    private GameObject LimbObject;
+    private SpriteRenderer Renderer;
+
+    public BodyPart(PlayerState.PlayerLimb slot, GameObject LimbObject)
     {
-        
+        this.slot = slot;
+        this.LimbObject = LimbObject;
+        this.Renderer = LimbObject.GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool Graft(Sprite newSprite)
     {
-        
+        this.Renderer.sprite = newSprite;
+        return true;
     }
 }

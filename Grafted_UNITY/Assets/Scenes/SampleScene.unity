@@ -239,6 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 469534288}
   - component: {fileID: 469534289}
+  - component: {fileID: 469534290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -260,11 +261,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1964487805}
+  - {fileID: 1072333255}
   - {fileID: 1756431622}
   - {fileID: 1088140939}
-  - {fileID: 1072333255}
-  - {fileID: 990169065}
   - {fileID: 1154318846}
+  - {fileID: 990169065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &469534289
@@ -289,6 +290,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &469534290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 469534287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31f3aa7cd54eb1449080e66bd3a51fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Head_Object: {fileID: 1964487804}
+  Torso_Object: {fileID: 1072333254}
+  Left_Arm_Object: {fileID: 1756431621}
+  Right_Arm_Object: {fileID: 1088140938}
+  Left_Leg_Object: {fileID: 1154318845}
+  Right_Leg_Object: {fileID: 990169064}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
