@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Process = GameState.Process;
 
 public class PlayerState : MonoBehaviour
 {
@@ -8,13 +10,6 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Right_Arm_Object;
     [SerializeField] private GameObject Left_Leg_Object;
     [SerializeField] private GameObject Right_Leg_Object;
-
-    private BodyPart Head;
-    private BodyPart Torso;
-    private BodyPart Left_Arm;
-    private BodyPart Right_Arm;
-    private BodyPart Left_Leg;
-    private BodyPart Right_Leg;
 
     public enum PlayerLimb
     {
@@ -42,13 +37,24 @@ public class PlayerState : MonoBehaviour
         Graft_Right_Leg,
     }
 
+    private Dictionary<PlayerLimb, BodyPart> Body;
+
     private void Awake()
     {
-        Head = new BodyPart(PlayerLimb.Head, Head_Object);
-        Torso = new BodyPart(PlayerLimb.Torso, Torso_Object);
-        Left_Arm = new BodyPart(PlayerLimb.Left_Arm, Left_Arm_Object);
-        Right_Arm = new BodyPart(PlayerLimb.Right_Arm, Right_Arm_Object);
-        Left_Leg = new BodyPart(PlayerLimb.Left_Leg, Left_Leg_Object);
-        Right_Leg = new BodyPart(PlayerLimb.Right_Leg, Right_Leg_Object);
+        Body = new Dictionary<PlayerLimb, BodyPart>{ 
+            { PlayerLimb.Head, new BodyPart(PlayerLimb.Head, PlayerAction.Graft_Head, Head_Object) },
+            { PlayerLimb.Torso, new BodyPart(PlayerLimb.Torso, PlayerAction.Graft_Torso, Torso_Object) },
+            { PlayerLimb.Left_Arm, new BodyPart(PlayerLimb.Left_Arm, PlayerAction.Graft_Left_Arm, Left_Arm_Object) },
+            { PlayerLimb.Right_Arm, new BodyPart(PlayerLimb.Right_Arm, PlayerAction.Graft_Right_Arm, Right_Arm_Object) },
+            { PlayerLimb.Left_Leg, new BodyPart(PlayerLimb.Left_Leg, PlayerAction.Graft_Left_Leg, Left_Leg_Object) },
+            { PlayerLimb.Right_Leg, new BodyPart(PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg, Right_Leg_Object) }
+        };
     }
+
+    public Process GraftLimb(BodyPart limb)
+    {
+        Body[limb.GetSlot()].Graft(limb.GetSprite());
+        return Process.DONE;
+    }
+
 }
