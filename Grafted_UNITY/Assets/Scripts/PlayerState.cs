@@ -27,7 +27,7 @@ public class PlayerState : MonoBehaviour
         };
     }
 
-    public Process GraftLimb(BodyPart newLimb)
+    public Process GraftLimb(Scriptable_BodyPart newLimb)
     {
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
         return Process.DONE;

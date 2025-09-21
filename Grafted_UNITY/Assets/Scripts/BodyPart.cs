@@ -3,8 +3,8 @@ using Process = Actions.Process;
 using P_Action = Actions.PlayerAction;
 using P_Limb= Actions.PlayerLimb;
 
-public class BodyPart {
-    private P_Limb slot;
+public class BodyPart : ScriptableObject {
+    [SerializeField] private P_Limb slot;
     private P_Action action;
     private GameObject LimbObject;
     private SpriteRenderer Renderer;

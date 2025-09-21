@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Actions : MonoBehaviour
 {
@@ -34,4 +35,15 @@ public class Actions : MonoBehaviour
         Graft_Left_Leg,
         Graft_Right_Leg,
     }
+
+    public static Dictionary<PlayerLimb, PlayerAction> ActionTranslator = new Dictionary<PlayerLimb, PlayerAction>
+    {
+        { PlayerLimb.Head, PlayerAction.Graft_Head },
+        { PlayerLimb.Torso, PlayerAction.Graft_Torso },
+        { PlayerLimb.Left_Arm, PlayerAction.Graft_Left_Arm },
+        { PlayerLimb.Right_Arm, PlayerAction.Graft_Right_Arm },
+        { PlayerLimb.Left_Leg, PlayerAction.Graft_Left_Leg },
+        { PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg },
+    };
+
 }
