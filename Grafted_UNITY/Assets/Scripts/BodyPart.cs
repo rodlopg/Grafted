@@ -1,8 +1,8 @@
 using UnityEngine;
-using Process = GameState.Process;
-using P_Action = PlayerState.PlayerAction;
+using Process = Actions.Process;
+using P_Action = Actions.PlayerAction;
+using P_Limb= Actions.PlayerLimb;
 
-using P_Limb= PlayerState.PlayerLimb;
 public class BodyPart {
     private P_Limb slot;
     private P_Action action;
@@ -23,7 +23,7 @@ public class BodyPart {
         return Process.DONE;
     }
 
-    public PlayerState.PlayerLimb GetSlot()
+    public Actions.PlayerLimb GetSlot()
     {
         return this.slot;
     }

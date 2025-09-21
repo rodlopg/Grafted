@@ -1,7 +1,7 @@
 using UnityEngine;
 
-using Process = GameState.Process;
-using P_Action = PlayerState.PlayerAction;
+using Process = Actions.Process;
+using P_Action = Actions.PlayerAction;
 public class GameProvider : MonoBehaviour
 {
     [SerializeField] GameState G_State;
