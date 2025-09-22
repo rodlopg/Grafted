@@ -5,8 +5,8 @@ using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
 public class GameProvider : MonoBehaviour
 {
-    [SerializeField] GameState G_State;
-    [SerializeField] PlayerState P_State;
+    [SerializeField] private GameState G_State;
+    [SerializeField] private PlayerState P_State;
 
     public Process Provide_Graft(Scriptable_BodyPart limb)
     {

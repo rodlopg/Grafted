@@ -18,12 +18,12 @@ public class PlayerState : MonoBehaviour
     private void Awake()
     {
         Body = new Dictionary<Limb, BodyPart>{ 
-            { Limb.Head, new BodyPart(Limb.Head, P_Action.Graft_Head, Head_Object) },
-            { Limb.Torso, new BodyPart(Limb.Torso, P_Action.Graft_Torso, Torso_Object) },
-            { Limb.Left_Arm, new BodyPart(Limb.Left_Arm, P_Action.Graft_Left_Arm, Left_Arm_Object) },
-            { Limb.Right_Arm, new BodyPart(Limb.Right_Arm, P_Action.Graft_Right_Arm, Right_Arm_Object) },
-            { Limb.Left_Leg, new BodyPart(Limb.Left_Leg, P_Action.Graft_Left_Leg, Left_Leg_Object) },
-            { Limb.Right_Leg, new BodyPart(Limb.Right_Leg, P_Action.Graft_Right_Leg, Right_Leg_Object) }
+            { Limb.Head, new BodyPart(Limb.Head, Head_Object) },
+            { Limb.Torso, new BodyPart(Limb.Torso, Torso_Object) },
+            { Limb.Left_Arm, new BodyPart(Limb.Left_Arm, Left_Arm_Object) },
+            { Limb.Right_Arm, new BodyPart(Limb.Right_Arm, Right_Arm_Object) },
+            { Limb.Left_Leg, new BodyPart(Limb.Left_Leg, Left_Leg_Object) },
+            { Limb.Right_Leg, new BodyPart(Limb.Right_Leg, Right_Leg_Object) }
         };
     }
 

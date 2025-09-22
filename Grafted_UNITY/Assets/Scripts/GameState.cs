@@ -3,7 +3,8 @@ using Process = Actions.Process;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
 
-public class GameState : MonoBehaviour
+[CreateAssetMenu(menuName = "Context/GameState")]
+public class GameState : ScriptableObject
 {
     private PlayerState PlayerState;
     private Actions.PlayerAction LastPlayerAction;

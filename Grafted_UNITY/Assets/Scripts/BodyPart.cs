@@ -5,14 +5,12 @@ using P_Limb= Actions.PlayerLimb;
 
 public class BodyPart : ScriptableObject {
     [SerializeField] private P_Limb slot;
-    private P_Action action;
     private GameObject LimbObject;
     private SpriteRenderer Renderer;
 
-    public BodyPart(P_Limb slot, P_Action action, GameObject LimbObject)
+    public BodyPart(P_Limb slot, GameObject LimbObject)
     {
         this.slot = slot;
-        this.action = action;
         this.LimbObject = LimbObject;
         this.Renderer = LimbObject.GetComponent<SpriteRenderer>();
     }
@@ -32,9 +30,8 @@ public class BodyPart : ScriptableObject {
     {
         return this.Renderer.sprite;
     }
-
     public P_Action GetAction()
     {
-        return this.action;
+        return Actions.ActionTranslator[this.slot];
     }
 }

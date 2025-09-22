@@ -11,6 +11,20 @@ public class Scriptable_BodyPart : MonoBehaviour
     [SerializeField] private P_Limb slot;
     [SerializeField] private Sprite sprite;
 
+    private void Awake()
+    {
+        var renderer = gameObject.GetComponent<SpriteRenderer>();
+        if (renderer != null)
+        {
+            renderer.sprite = this.sprite;
+        }
+        else
+        {
+            Debug.LogWarning("No SpriteRenderer found on this GameObject!");
+        }
+    }
+
+
     public Actions.PlayerLimb GetSlot()
     {
         return this.slot;
