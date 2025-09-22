@@ -6,6 +6,7 @@ using P_Action = Actions.PlayerAction;
 
 public class PlayerState : MonoBehaviour
 {
+    // References to the player's body parts in the scene
     [SerializeField] private GameObject Head_Object;
     [SerializeField] private GameObject Torso_Object;
     [SerializeField] private GameObject Left_Arm_Object;
@@ -13,10 +14,12 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Left_Leg_Object;
     [SerializeField] private GameObject Right_Leg_Object;
 
+    // Dictionary mapping limb types to BodyPart objects
     private Dictionary<Limb, BodyPart> Body;
 
     private void Awake()
     {
+        // Initialize the dictionary with body part instances
         Body = new Dictionary<Limb, BodyPart>{ 
             { Limb.Head, new BodyPart(Limb.Head, Head_Object) },
             { Limb.Torso, new BodyPart(Limb.Torso, Torso_Object) },
@@ -27,10 +30,10 @@ public class PlayerState : MonoBehaviour
         };
     }
 
+    // Grafts a new limb by swapping its sprite
     public Process GraftLimb(Scriptable_BodyPart newLimb)
     {
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
         return Process.DONE;
     }
-
 }

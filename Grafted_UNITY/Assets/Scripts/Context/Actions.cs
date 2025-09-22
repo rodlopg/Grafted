@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class Actions : MonoBehaviour
 {
+    // Represents a simple process lifecycle (used for grafting and state changes)
     public enum Process
     {
         START,
@@ -10,6 +11,7 @@ public class Actions : MonoBehaviour
         DONE
     }
 
+    // Different possible player limbs
     public enum PlayerLimb
     {
         Head,
@@ -20,6 +22,7 @@ public class Actions : MonoBehaviour
         Right_Leg,
     }
 
+    // Different possible player actions
     public enum PlayerAction
     {
         Idle,
@@ -36,6 +39,7 @@ public class Actions : MonoBehaviour
         Graft_Right_Leg,
     }
 
+    // Maps each limb to the corresponding graft action
     public static Dictionary<PlayerLimb, PlayerAction> ActionTranslator = new Dictionary<PlayerLimb, PlayerAction>
     {
         { PlayerLimb.Head, PlayerAction.Graft_Head },
@@ -45,5 +49,4 @@ public class Actions : MonoBehaviour
         { PlayerLimb.Left_Leg, PlayerAction.Graft_Left_Leg },
         { PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg },
     };
-
 }
