@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GraftTester : MonoBehaviour
 {
@@ -10,16 +11,14 @@ public class GraftTester : MonoBehaviour
 
     private int currentIndex = 0;
 
-    private void Update()
+    public void Graft(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (context.performed) {
             if (bodyPartPrefabs.Length == 0 || gameProvider == null) return;
 
             // Get the Scriptable_BodyPart from the current prefab
             Scriptable_BodyPart part = bodyPartPrefabs[currentIndex].GetComponent<Scriptable_BodyPart>();
-            if (part != null)
-            {
+            if (part != null) {
                 gameProvider.Provide_Graft(part);
             }
 
