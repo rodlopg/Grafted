@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c65a335529fad1048ac5b9a7dd0a0958
+guid: b10ed1b9f764e9540979f8d341f23188
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2467180007496842330
-    second: Right_Leg_A_0
+      213: -4174824987688304899
+    second: Right_Leg_Box_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Right_Leg_A_0
+      name: Right_Leg_Box_0
       rect:
         serializedVersion: 2
         x: 5
         y: 0
-        width: 10
-        height: 28
+        width: 9
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -116,34 +116,34 @@ TextureImporter:
       tessellationDetail: -1
       bones:
       - name: bone_1
-        guid: d6150fbc696cac54b9e34533bc22825e
-        position: {x: 5.401392, y: 25.762304, z: 0}
-        rotation: {x: 0, y: 0, z: -0.7173956, w: 0.69666606}
-        length: 24.625175
+        guid: 8b9f6da0423e5b14ea6abc3e6151a6e9
+        position: {x: 4.607375, y: 27.06161, z: 0}
+        rotation: {x: 0, y: 0, z: -0.70613754, w: 0.70807475}
+        length: 26.347101
         parentId: -1
         color:
           serializedVersion: 2
           rgba: 4278190335
-      spriteID: a5c7bc7252f2d3220800000000000000
-      internalID: 2467180007496842330
+      spriteID: dfef969faca0016c0800000000000000
+      internalID: -4174824987688304899
       vertices:
-      - {x: 8, y: 4}
-      - {x: 9.578, y: 8.486}
-      - {x: 9.940001, y: 13.398}
-      - {x: 9.984, y: 18.394001}
-      - {x: 9.914, y: 23.39}
-      - {x: 9.605, y: 28}
-      - {x: 4.628, y: 27.791}
-      - {x: 0.013999939, y: 27.012}
-      - {x: 0.0029997826, y: 22.019001}
-      - {x: 0.0009999275, y: 17.019001}
-      - {x: 0.0009999275, y: 12.02}
-      - {x: 0.0009999275, y: 7.02}
-      - {x: 0, y: 2.021}
-      - {x: 0, y: 0}
-      - {x: 5, y: 0}
-      - {x: 10, y: 0}
-      indices: 000000000b00000001000000000000000c0000000b000000000000000e0000000c000000000000000f0000000e000000010000000a00000002000000010000000b0000000a000000020000000900000003000000020000000a000000090000000300000008000000040000000300000009000000080000000400000006000000050000000400000008000000060000000600000008000000070000000c0000000e0000000d000000
+      - {x: 6.934, y: 0.2989998}
+      - {x: 9, y: 1}
+      - {x: 9, y: 8}
+      - {x: 9, y: 13}
+      - {x: 9, y: 17.999}
+      - {x: 9, y: 23}
+      - {x: 9, y: 27.998}
+      - {x: 9, y: 29}
+      - {x: 4.028, y: 28.774}
+      - {x: 0, y: 28}
+      - {x: 0.0009999275, y: 23}
+      - {x: 0.0009999275, y: 18}
+      - {x: 0.001999855, y: 13.002}
+      - {x: 0.02699995, y: 8.000999}
+      - {x: 0.25299978, y: 3.04}
+      - {x: 1, y: 0}
+      indices: 000000000200000001000000000000000e00000002000000000000000f0000000e000000020000000d00000003000000020000000e0000000d000000030000000c00000004000000030000000d0000000c000000040000000b00000005000000040000000c0000000b000000050000000800000006000000050000000a00000008000000050000000b0000000a000000060000000800000007000000080000000a00000009000000
       edges:
       - {x: 0, y: 1}
       - {x: 0, y: 15}
@@ -293,18 +293,176 @@ TextureImporter:
     outline: []
     customData: 
     physicsShape: []
-    bones: []
-    spriteID: ae8cac8c4c5933949bd84e1c3accb5ca
-    internalID: 0
-    vertices: []
-    indices: 
-    edges: []
-    weights: []
+    bones:
+    - name: bone_1
+      guid: 68ee223cc19189844b880ce380122c35
+      position: {x: 9.174274, y: 27.71126, z: 0}
+      rotation: {x: 0, y: 0, z: -0.70141274, w: 0.7127554}
+      length: 14.66064
+      parentId: -1
+      color:
+        serializedVersion: 2
+        rgba: 4278190335
+    - name: bone_2
+      guid: 48b9a2201ba01c2428ec3564963b67bd
+      position: {x: 14.66064, y: 0.000002169701, z: 0}
+      rotation: {x: 0, y: 0, z: 0.00000004248353, w: 1}
+      length: 12.339484
+      parentId: 0
+      color:
+        serializedVersion: 2
+        rgba: 4278255615
+    spriteID: f2122daded2bc6743bf187c9898c6964
+    internalID: 1787766714
+    vertices:
+    - {x: 12.26, y: 0.11400032}
+    - {x: 15, y: 0.38299942}
+    - {x: 15, y: 9.497999}
+    - {x: 15, y: 15.613}
+    - {x: 15, y: 21.73}
+    - {x: 15, y: 27.844}
+    - {x: 15, y: 28}
+    - {x: 9.691999, y: 29.241}
+    - {x: 4.3030005, y: 28.3}
+    - {x: 4.0629997, y: 22.31}
+    - {x: 4.0109997, y: 16.196999}
+    - {x: 4.0299997, y: 10.080999}
+    - {x: 4.285, y: 4.0039997}
+    - {x: 5.152, y: 0}
+    indices: 000000000200000001000000000000000c00000002000000000000000d0000000c000000020000000b00000003000000020000000c0000000b000000030000000a00000004000000030000000b0000000a000000040000000700000005000000040000000900000007000000040000000a00000009000000050000000700000006000000070000000900000008000000
+    edges:
+    - {x: 0, y: 1}
+    - {x: 0, y: 13}
+    - {x: 1, y: 2}
+    - {x: 2, y: 3}
+    - {x: 3, y: 4}
+    - {x: 4, y: 5}
+    - {x: 5, y: 6}
+    - {x: 6, y: 7}
+    - {x: 7, y: 8}
+    - {x: 8, y: 9}
+    - {x: 9, y: 10}
+    - {x: 10, y: 11}
+    - {x: 11, y: 12}
+    - {x: 12, y: 13}
+    weights:
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 0.98045367
+      'weight[1]': 0.01954633
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 1
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 0.99999994
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 0
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
+    - 'weight[0]': 1
+      'weight[1]': 0
+      'weight[2]': 0
+      'weight[3]': 0
+      'boneIndex[0]': 1
+      'boneIndex[1]': 0
+      'boneIndex[2]': 0
+      'boneIndex[3]': 0
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Right_Leg_A_0: 2467180007496842330
+      Right_Leg_Box_0: -4174824987688304899
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
