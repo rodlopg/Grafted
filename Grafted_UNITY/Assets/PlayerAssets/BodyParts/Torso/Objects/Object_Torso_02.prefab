@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slot: 1
-  sprite: {fileID: -971405743830911097, guid: e90c7c6dac6090e49ba8b59d6beb9d19, type: 3}
+  sprite: {fileID: 21300000, guid: 89a16310eac4eaa40bd4c8da9b6acf9f, type: 3}
 --- !u!212 &-1806405743786404648
 SpriteRenderer:
   m_ObjectHideFlags: 0
