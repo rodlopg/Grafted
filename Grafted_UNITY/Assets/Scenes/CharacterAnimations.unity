@@ -929,6 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 405f792d5906e8544947a8ca533e7f36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAnimator: {fileID: 469534289}
   attackTransform: {fileID: 1321928597}
   attackRange: 0.4
   attackableLayer:

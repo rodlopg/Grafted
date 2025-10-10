@@ -3,6 +3,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractions : MonoBehaviour
 {
+    private const string ATTACK = "attackTrigger";
+
+    [SerializeField] private Animator playerAnimator;
+
     [SerializeField] private Transform attackTransform;
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackableLayer;
@@ -37,7 +41,7 @@ public class PlayerInteractions : MonoBehaviour
     // Attack handler
     public void Attack(InputAction.CallbackContext context) {
         if (context.performed && canAttack) {
-            print("ATTACK");
+            playerAnimator.SetTrigger(ATTACK);
 
             canAttack = false;
             

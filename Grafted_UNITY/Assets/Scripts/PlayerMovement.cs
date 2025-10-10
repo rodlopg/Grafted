@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(transform.position, Vector2.down * groundCheckDistance, rayColor);
 
         // If the ray hits, then the player can dash
-        if (hit) {
+        if (hit && !isDashing) {
             canDash = true;
         } 
         
@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
     // Dash event
     public void Dash(InputAction.CallbackContext context) {
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
-        if (context.performed && canDash) {
+        if (context.performed && canDash && !isDashing) {
             canDash = false;
             StartCoroutine(dashRoutine());
         }
@@ -99,6 +99,7 @@ public class PlayerMovement : MonoBehaviour
     // Dash coroutine
     private IEnumerator dashRoutine() {
         isDashing = true;
+        canDash = false;
 
         // Save the previous gravity and set the current to 0 so only the dash force is applied
         float prevGravity = rb.gravityScale;
