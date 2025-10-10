@@ -126,6 +126,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""756035c4-cbb9-4c61-be17-2193688fe1a7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -216,6 +225,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Graft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""831df6dc-8e0a-461f-a255-fd1d99dbf6f1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -228,6 +248,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_General_Dash = m_General.FindAction("Dash", throwIfNotFound: true);
         m_General_Jump = m_General.FindAction("Jump", throwIfNotFound: true);
         m_General_Graft = m_General.FindAction("Graft", throwIfNotFound: true);
+        m_General_Attack = m_General.FindAction("Attack", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -312,6 +333,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_General_Dash;
     private readonly InputAction m_General_Jump;
     private readonly InputAction m_General_Graft;
+    private readonly InputAction m_General_Attack;
     /// <summary>
     /// Provides access to input actions defined in input action map "General".
     /// </summary>
@@ -339,6 +361,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "General/Graft".
         /// </summary>
         public InputAction @Graft => m_Wrapper.m_General_Graft;
+        /// <summary>
+        /// Provides access to the underlying input action "General/Attack".
+        /// </summary>
+        public InputAction @Attack => m_Wrapper.m_General_Attack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -377,6 +403,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Graft.started += instance.OnGraft;
             @Graft.performed += instance.OnGraft;
             @Graft.canceled += instance.OnGraft;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         /// <summary>
@@ -400,6 +429,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Graft.started -= instance.OnGraft;
             @Graft.performed -= instance.OnGraft;
             @Graft.canceled -= instance.OnGraft;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         /// <summary>
@@ -468,5 +500,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnGraft(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Attack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnAttack(InputAction.CallbackContext context);
     }
 }
