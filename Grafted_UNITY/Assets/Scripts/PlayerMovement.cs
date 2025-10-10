@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private bool isJumping = false;
     private bool canDash = false;
 
-    private float groundCheckDistance = 2.1f;
+    private float groundCheckDistance = 0.87f;
 
     // This timer prevents double collisions
     private float raycastTimer = 0.2f;
