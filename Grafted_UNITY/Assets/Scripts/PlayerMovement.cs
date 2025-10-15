@@ -20,16 +20,15 @@ public class PlayerMovement : MonoBehaviour
     private float dashForce = 15f;
     private float dashDuration = 0.2f;
 
+    private bool isGrounded = false;
     private bool isDashing = false;
-    private bool isJumping = false;
-    private bool canDash = false;
+    private bool canDash = true;
 
     private float groundCheckDistance = 0.87f;
 
-    // This timer prevents double collisions
-    private float raycastTimer = 0.2f;
-
-    private Vector2 moveDirection, lastDirection;
+    // Default direction
+    private Vector2 moveDirection = Vector2.right;
+    private Vector2 lastDirection;
 
     private void Awake() {
         // Enabling the default/general controls
@@ -43,15 +42,14 @@ public class PlayerMovement : MonoBehaviour
         Color rayColor = hit ? Color.green : Color.red;
         Debug.DrawRay(transform.position, Vector2.down * groundCheckDistance, rayColor);
 
-        // If the ray hits, then the player can dash
-        if (hit && !isDashing) {
-            canDash = true;
-        } 
-        
-        // If the ray hits and the timer is done, then the player can jump
-        if (hit && raycastTimer < 0) {
-            isJumping = false;
-            raycastTimer = 0.2f;
+        // If the ray hits, assume grounded state
+        if (hit) {
+            isGrounded = true;
+            if (!isDashing) {
+                canDash = true;
+            }
+        } else {
+            isGrounded= false; 
         }
     }
 
@@ -60,26 +58,20 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing) {
             rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
         }
-
-        // If the player is jumping, lower the timer
-        if (isJumping) {
-            raycastTimer -= Time.deltaTime;
-        }
     }
 
     // Jump event
     public void Jump(InputAction.CallbackContext context) {
-        // If the player is not already jumping, apply the upward force
-        if (context.performed && !isJumping) {
+        // If the player is grounded, apply the upward force
+        if (context.performed && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-            isJumping = true;
         }
     }
 
     // Dash event
     public void Dash(InputAction.CallbackContext context) {
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
-        if (context.performed && canDash && !isDashing) {
+        if (context.performed && !isDashing && canDash) {
             canDash = false;
             StartCoroutine(dashRoutine());
         }
@@ -92,21 +84,27 @@ public class PlayerMovement : MonoBehaviour
 
         // As long as the last move direction isn't 0, it will get stored so that the dash can be made even when no direction keys are being pressed
         if (moveDirection != Vector2.zero) {
-            lastDirection = moveDirection;
+            lastDirection = new Vector2(Mathf.Sign(moveDirection.x) * 1f, 0);
         }
     }
 
     // Dash coroutine
     private IEnumerator dashRoutine() {
         isDashing = true;
-        canDash = false;
 
         // Save the previous gravity and set the current to 0 so only the dash force is applied
         float prevGravity = rb.gravityScale;
         rb.gravityScale = 0;
         tr.emitting = true;
-        
-        rb.linearVelocity = new Vector2(lastDirection.x * dashForce, lastDirection.y * dashForce);
+
+        Vector2 dashDirection;
+        if (moveDirection == Vector2.zero) {
+            dashDirection = lastDirection;
+        } else {
+            dashDirection = moveDirection;
+        }
+
+        rb.linearVelocity = new Vector2(dashDirection.x * dashForce, dashDirection.y * dashForce);
 
         yield return new WaitForSeconds(dashDuration);
 
