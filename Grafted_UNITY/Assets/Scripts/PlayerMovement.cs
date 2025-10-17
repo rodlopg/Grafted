@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
     private float groundCheckDistance = 0.87f;
 
     // Default direction
-    private Vector2 moveDirection = Vector2.right;
-    private Vector2 lastDirection;
+    private Vector2 moveDirection;
+    private Vector2 lastDirection = Vector2.right;
 
     private void Awake() {
         // Enabling the default/general controls
@@ -72,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     public void Dash(InputAction.CallbackContext context) {
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
         if (context.performed && !isDashing && canDash) {
-            canDash = false;
             StartCoroutine(dashRoutine());
         }
     }
@@ -91,27 +90,26 @@ public class PlayerMovement : MonoBehaviour
     // Dash coroutine
     private IEnumerator dashRoutine() {
         isDashing = true;
+        canDash = false;
 
         // Save the previous gravity and set the current to 0 so only the dash force is applied
         float prevGravity = rb.gravityScale;
-        rb.gravityScale = 0;
         tr.emitting = true;
 
         Vector2 dashDirection;
-        if (moveDirection == Vector2.zero) {
-            dashDirection = lastDirection;
-        } else {
-            dashDirection = moveDirection;
-        }
+        if (moveDirection == Vector2.zero) dashDirection = lastDirection;
+         else dashDirection = moveDirection;
 
-        rb.linearVelocity = new Vector2(dashDirection.x * dashForce, dashDirection.y * dashForce);
+        if (dashDirection == Vector2.up) rb.gravityScale = prevGravity; 
+        else rb.gravityScale = 0; 
+
+        rb.linearVelocity = dashDirection * dashForce;
 
         yield return new WaitForSeconds(dashDuration);
 
         // Enable previous gravity
         rb.gravityScale = prevGravity;
         tr.emitting = false;
-
         isDashing = false;
     }
 }
