@@ -40,6 +40,11 @@ public class BodyPart : ScriptableObject
         return this.Renderer.sprite;
     }
 
+    public SpriteRenderer GetRenderer()
+    {
+        return this.Renderer;
+    }
+
     // Returns the graft action associated with this limb type
     public P_Action GetAction()
     {

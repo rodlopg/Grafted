@@ -38,5 +38,10 @@ public class PlayerState : MonoBehaviour
         return Process.DONE;
     }
 
+    public Dictionary<Limb, BodyPart> GetBody()
+    {
+        return this.Body;
+    }
+
    
 }
