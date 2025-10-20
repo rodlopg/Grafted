@@ -16,7 +16,8 @@ public class PlayerState : MonoBehaviour
 
     // Dictionary mapping limb types to BodyPart objects
     private Dictionary<Limb, BodyPart> Body;
-   
+    
+
 
     private void Awake()
     {
@@ -43,5 +44,41 @@ public class PlayerState : MonoBehaviour
         return this.Body;
     }
 
-   
+    public static Process Animate(Animator animator, P_Action action)
+    {
+        List<string> conditions = Actions.PlayerAnimations[action];
+        if (conditions != null)
+        {
+            foreach (string c in conditions)
+            {
+                animator.SetTrigger(c);
+            }
+        }
+
+        /*
+        foreach(P_Action a in Actions.AnimationTranslator.Keys)
+        {
+            
+            if(a == action)
+            {
+                foreach(string c in conditions)
+                {
+                    animator.SetTrigger(c);
+                }
+            }
+            else
+            {
+                foreach (string c in conditions)
+                {
+                    animator.SetBool(c, false);
+                }
+            }
+            
+            
+        }
+        */
+        return Process.DONE;
+    }
+
+
 }

@@ -26,38 +26,5 @@ public class GameProvider : MonoBehaviour
         return Process.DONE; // Always returns DONE for now
     }
 
-    public static Process Provide_Animation(Animator animator, P_Action action)
-    {
-        List<string> conditions = Actions.AnimationTranslator[action];
-        if (conditions != null) {
-            foreach (string c in conditions)
-            {
-                animator.SetTrigger(c);
-            }
-        }
-
-        /*
-        foreach(P_Action a in Actions.AnimationTranslator.Keys)
-        {
-            
-            if(a == action)
-            {
-                foreach(string c in conditions)
-                {
-                    animator.SetTrigger(c);
-                }
-            }
-            else
-            {
-                foreach (string c in conditions)
-                {
-                    animator.SetBool(c, false);
-                }
-            }
-            
-            
-        }
-        */
-        return Process.DONE;
-    }
+    
 }

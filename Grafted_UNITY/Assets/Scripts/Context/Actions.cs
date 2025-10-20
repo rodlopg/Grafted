@@ -51,7 +51,7 @@ public class Actions : MonoBehaviour
         { PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg },
     };
 
-    public static Dictionary<PlayerAction, List<string>> AnimationTranslator = new Dictionary<PlayerAction, List<string>>
+    public static Dictionary<PlayerAction, List<string>> PlayerAnimations= new Dictionary<PlayerAction, List<string>>
     {
         { PlayerAction.Idle, new List<string> { "isIdle" } },
         { PlayerAction.Dash, new List<string> { "isDash" } },

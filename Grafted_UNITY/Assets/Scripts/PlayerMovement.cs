@@ -78,15 +78,15 @@ public class PlayerMovement : MonoBehaviour
         // Trigger appropriate animation
         if (isMovingLeft)
         {
-            GameProvider.Provide_Animation(playerAnimator, P_Action.Left_Walk);
+            PlayerState.Animate(playerAnimator, P_Action.Left_Walk);
         }
         else if (isMovingRight)
         {
-            GameProvider.Provide_Animation(playerAnimator, P_Action.Right_Walk);
+            PlayerState.Animate(playerAnimator, P_Action.Right_Walk);
         }
         else
         {
-            GameProvider.Provide_Animation(playerAnimator, P_Action.Idle);
+            PlayerState.Animate(playerAnimator, P_Action.Idle);
         }
     }
 
@@ -96,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            if (GameProvider.Provide_Animation(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
+            if (PlayerState.Animate(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
         }
     }
 
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
         if (context.performed && !isDashing && canDash) {
             StartCoroutine(dashRoutine());
-            if (GameProvider.Provide_Animation(playerAnimator, P_Action.Dash) == Actions.Process.DONE) return;
+            if (PlayerState.Animate(playerAnimator, P_Action.Dash) == Actions.Process.DONE) return;
         }
     }
 
