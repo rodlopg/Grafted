@@ -1,9 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using P_Action = Actions.PlayerAction;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private TrailRenderer tr;
     [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] private Animator playerAnimator;
 
     private float moveSpeed = 5f;
     private float jumpForce = 10f;
@@ -58,6 +62,32 @@ public class PlayerMovement : MonoBehaviour
         if (!isDashing) {
             rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
         }
+
+        moveDirection = playerInputActions.General.Movement.ReadValue<Vector2>();
+
+        // Store the last direction for dashing
+        if (Mathf.Abs(moveDirection.x) > 0.01f)
+        {
+            lastDirection = new Vector2(Mathf.Sign(moveDirection.x), 0);
+        }
+
+        // Check if the player is moving
+        bool isMovingLeft = moveDirection.x < -0.01f;
+        bool isMovingRight = moveDirection.x > 0.01f;
+
+        // Trigger appropriate animation
+        if (isMovingLeft)
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Left_Walk);
+        }
+        else if (isMovingRight)
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Right_Walk);
+        }
+        else
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Idle);
+        }
     }
 
     // Jump event
@@ -65,6 +95,8 @@ public class PlayerMovement : MonoBehaviour
         // If the player is grounded, apply the upward force
         if (context.performed && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+            if (GameProvider.Provide_Animation(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
         }
     }
 
@@ -73,19 +105,44 @@ public class PlayerMovement : MonoBehaviour
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
         if (context.performed && !isDashing && canDash) {
             StartCoroutine(dashRoutine());
+            if (GameProvider.Provide_Animation(playerAnimator, P_Action.Dash) == Actions.Process.DONE) return;
         }
     }
 
     // Movement event
-    public void Movement(InputAction.CallbackContext context) {
-        // Read Vector2 from Input System
+
+    /*
+    public void Movement(InputAction.CallbackContext context)
+    {
         moveDirection = context.ReadValue<Vector2>();
 
-        // As long as the last move direction isn't 0, it will get stored so that the dash can be made even when no direction keys are being pressed
-        if (moveDirection != Vector2.zero) {
-            lastDirection = new Vector2(Mathf.Sign(moveDirection.x) * 1f, 0);
+        // Store the last direction for dashing
+        if (Mathf.Abs(moveDirection.x) > 0.01f)
+        {
+            lastDirection = new Vector2(Mathf.Sign(moveDirection.x), 0);
+        }
+
+        // Check if the player is moving
+        bool isMovingLeft = moveDirection.x < -0.01f;
+        bool isMovingRight = moveDirection.x > 0.01f;
+
+        // Trigger appropriate animation
+        if (isMovingLeft)
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Left_Walk);
+        }
+        else if (isMovingRight)
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Right_Walk);
+        }
+        else
+        {
+            GameProvider.Provide_Animation(playerAnimator, P_Action.Idle);
         }
     }
+    */
+
+
 
     // Dash coroutine
     private IEnumerator dashRoutine() {

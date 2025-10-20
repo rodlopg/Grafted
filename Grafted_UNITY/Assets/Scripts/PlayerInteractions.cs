@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    private const string ATTACK = "attackTrigger";
+    private const string ATTACK = "isAttackingRight";
 
     [SerializeField] private Animator playerAnimator;
 

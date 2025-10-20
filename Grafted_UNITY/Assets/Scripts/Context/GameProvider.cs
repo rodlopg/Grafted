@@ -1,8 +1,10 @@
+using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-using Process = Actions.Process;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
+using Process = Actions.Process;
 
 public class GameProvider : MonoBehaviour
 {
@@ -18,9 +20,44 @@ public class GameProvider : MonoBehaviour
         if (P_State.GraftLimb(limb) == Process.DONE)
         {
             // If graft succeeded, update the GameState with the last action performed
-            G_State.SetLastPlayerAction(limb.GetAction());
+            GameState.SetLastPlayerAction(limb.GetAction());
         }
 
         return Process.DONE; // Always returns DONE for now
+    }
+
+    public static Process Provide_Animation(Animator animator, P_Action action)
+    {
+        List<string> conditions = Actions.AnimationTranslator[action];
+        if (conditions != null) {
+            foreach (string c in conditions)
+            {
+                animator.SetTrigger(c);
+            }
+        }
+
+        /*
+        foreach(P_Action a in Actions.AnimationTranslator.Keys)
+        {
+            
+            if(a == action)
+            {
+                foreach(string c in conditions)
+                {
+                    animator.SetTrigger(c);
+                }
+            }
+            else
+            {
+                foreach (string c in conditions)
+                {
+                    animator.SetBool(c, false);
+                }
+            }
+            
+            
+        }
+        */
+        return Process.DONE;
     }
 }

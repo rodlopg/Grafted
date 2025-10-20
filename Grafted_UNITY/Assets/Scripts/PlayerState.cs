@@ -16,6 +16,7 @@ public class PlayerState : MonoBehaviour
 
     // Dictionary mapping limb types to BodyPart objects
     private Dictionary<Limb, BodyPart> Body;
+   
 
     private void Awake()
     {
@@ -36,4 +37,6 @@ public class PlayerState : MonoBehaviour
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
         return Process.DONE;
     }
+
+   
 }

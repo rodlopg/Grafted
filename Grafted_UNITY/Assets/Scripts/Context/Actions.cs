@@ -26,6 +26,7 @@ public class Actions : MonoBehaviour
     public enum PlayerAction
     {
         Idle,
+        Dash,
         Right_Walk,
         Left_Walk,
         Right_Attack,
@@ -48,5 +49,22 @@ public class Actions : MonoBehaviour
         { PlayerLimb.Right_Arm, PlayerAction.Graft_Right_Arm },
         { PlayerLimb.Left_Leg, PlayerAction.Graft_Left_Leg },
         { PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg },
+    };
+
+    public static Dictionary<PlayerAction, List<string>> AnimationTranslator = new Dictionary<PlayerAction, List<string>>
+    {
+        { PlayerAction.Idle, new List<string> { "isIdle" } },
+        { PlayerAction.Dash, new List<string> { "isDash" } },
+        { PlayerAction.Right_Walk, new List<string> { "isWalking", "isMovingRight" } },
+        { PlayerAction.Left_Walk, new List<string> { "isWalking", "isMovingLeft" } },
+        { PlayerAction.Right_Attack, new List<string> { "isAttackingRight" } },
+        { PlayerAction.Left_Attack, new List<string> { "isAttackingLeft" } },
+        { PlayerAction.Jump, new List<string> { "isJumping" } },
+        { PlayerAction.Graft_Head, new List<string> { "isGraftingHead" } },
+        { PlayerAction.Graft_Torso, new List<string> { "isGraftingTorso" } },
+        { PlayerAction.Graft_Left_Arm, new List<string> { "isGraftingLeftArm" } },
+        { PlayerAction.Graft_Right_Arm, new List<string> { "isGraftingRightArm" } },
+        { PlayerAction.Graft_Left_Leg, new List<string> { "isGraftingLeftLeg" } },
+        { PlayerAction.Graft_Right_Leg, new List<string> { "isGraftingRightLeg" } },
     };
 }

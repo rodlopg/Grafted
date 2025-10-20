@@ -10,12 +10,15 @@ public class GameState : ScriptableObject
     private PlayerState PlayerState;
 
     // Last action the player performed
-    private Actions.PlayerAction LastPlayerAction;
+    private static Actions.PlayerAction LastPlayerAction;
 
     // Updates the last player action and returns DONE
-    public Process SetLastPlayerAction(P_Action action)
+    public static Process SetLastPlayerAction(P_Action action)
     {
-        this.LastPlayerAction = action;
+        GameState.LastPlayerAction = action;
         return Process.DONE;
     }
+
+
+
 }
