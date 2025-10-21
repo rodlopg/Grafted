@@ -70,6 +70,7 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
     }
 
+    // Damage taken and death functions for the player
     public void takeDamage(float damage) {
         if(playerMovement.isDashing) return;
 

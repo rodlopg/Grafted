@@ -8,6 +8,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform projectileSpawnLocation;
 
+    // Boss stats
     public float health { get; private set; }
     private float attackCooldown = 3f;
 
@@ -18,6 +19,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
         health = 1f;
     }
 
+    // Projectile attack every 3 seconds
     void Update() {
         attackCooldown -= Time.deltaTime;
         if(attackCooldown < 0) {
@@ -26,6 +28,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
         }
     }
 
+    // Damage taken and death functions for the boss
     public void takeDamage(float damage) {
         this.health -= damage;
         onBossHitUI?.Invoke(this, EventArgs.Empty);
@@ -39,6 +42,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    // Spawn the projectile and give it the player's location
     private void projectileAttack() {
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation);
         projectile.GetComponent<MaterialCauseProjectileLogic>().playerTransform = playerTransform;

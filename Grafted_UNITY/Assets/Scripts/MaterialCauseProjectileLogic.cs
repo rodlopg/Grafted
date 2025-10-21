@@ -7,6 +7,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
 
     [SerializeField] private LayerMask playerLayer;
 
+    // Projectiles stats
     private float projectileSpeed = 2.5f;
     private float projectileDamage = 0.1f;
     private float projectileHealth;
@@ -18,6 +19,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
 
     void Update()
     {
+        // If the projectile does not know the player's location, it won't do anything
         if (playerTransform == null) return;
 
         Vector3 moveDir = (playerTransform.position - transform.position).normalized;
@@ -25,6 +27,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
+        // To theck for the same layer mask as the player's and applly damage to them
         if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
             PlayerInteractions playerInteraction = collision.gameObject.GetComponent<PlayerInteractions>();
             playerInteraction.takeDamage(projectileDamage);
@@ -33,6 +36,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
 
     }
 
+    // Damage taken and death functions for this projectile
     public void takeDamage(float damage) {
         projectileHealth -= damage;
        

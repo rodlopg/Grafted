@@ -19,18 +19,19 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
 
+    // Player movement stats
     private float moveSpeed = 5f;
     private float jumpForce = 10f;
     private float dashForce = 15f;
     private float dashDuration = 0.2f;
-
     private bool isGrounded = false;
     public bool isDashing { get; private set; }
     private bool canDash = true;
 
+    // Distance for every raycast in order to check if the player is touching the ground
     private float groundCheckDistance = 0.87f;
 
-    // Default direction
+    // Default directions
     private Vector2 moveDirection;
     private Vector2 lastDirection = Vector2.right;
 
@@ -92,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Jump event
     public void Jump(InputAction.CallbackContext context) {
-        // If the player is grounded, apply the upward force
+        // Only if the player is grounded he is allowed to jump
         if (context.performed && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
