@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashDuration = 0.2f;
 
     private bool isGrounded = false;
-    private bool isDashing = false;
+    public bool isDashing { get; private set; }
     private bool canDash = true;
 
     private float groundCheckDistance = 0.87f;

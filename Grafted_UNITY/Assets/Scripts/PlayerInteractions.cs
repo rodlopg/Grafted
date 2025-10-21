@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
-public class PlayerInteractions : MonoBehaviour
+public class PlayerInteractions : MonoBehaviour, IDamageable
 {
     private const string ATTACK = "isAttackingRight";
 
+    [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator playerAnimator;
 
     [SerializeField] private Transform attackTransform;
@@ -16,10 +19,13 @@ public class PlayerInteractions : MonoBehaviour
 
     // Entity attributes
     public float health { get; private set; }
-    private float attackPower = 0.1f;
+    private float attackPower = 0.05f;
     private float attackCooldown = 0.5f;
     private bool canAttack = true;
 
+    // Event that fires when player gets hit
+    public static event EventHandler onPlayerHitUI;
+            
     void Start()
     {
         health = 1f;
@@ -50,7 +56,8 @@ public class PlayerInteractions : MonoBehaviour
 
             // Apply damage to all attackable objects
             for (int i = 0; i < hits.Length; i++) {
-                // Deal damage function on enemies
+                IDamageable damagableObject = hits[i].collider.GetComponentInParent<IDamageable>();
+                damagableObject.takeDamage(this.attackPower);
             }
         }
     }
@@ -61,5 +68,20 @@ public class PlayerInteractions : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackTransform.position, attackRange);
+    }
+
+    public void takeDamage(float damage) {
+        if(playerMovement.isDashing) return;
+
+        this.health -= damage;
+        onPlayerHitUI?.Invoke(this, EventArgs.Empty);
+
+        if (this.health < 0) {
+            death();
+        }
+    }
+
+    public void death() {
+        Destroy(gameObject);
     }
 }
