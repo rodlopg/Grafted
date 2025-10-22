@@ -9,7 +9,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
 
     // Projectiles stats
     private float projectileSpeed = 2.5f;
-    private float projectileDamage = 0.1f;
+    private float projectileDamage = 0.3f;
     private float projectileHealth;
 
     private void Start() {

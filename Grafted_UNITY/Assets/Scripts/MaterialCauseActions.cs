@@ -10,7 +10,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 
     // Boss stats
     public float health { get; private set; }
-    private float attackCooldown = 3f;
+    private float attackCooldown = 2f;
 
     public static event EventHandler onBossHitUI;
 
@@ -24,7 +24,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
         attackCooldown -= Time.deltaTime;
         if(attackCooldown < 0) {
             projectileAttack();
-            attackCooldown = 3f;
+            attackCooldown = 2f;
         }
     }
 
@@ -44,7 +44,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 
     // Spawn the projectile and give it the player's location
     private void projectileAttack() {
-        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation.position, projectileSpawnLocation.rotation);
         projectile.GetComponent<MaterialCauseProjectileLogic>().playerTransform = playerTransform;
     }
 }
