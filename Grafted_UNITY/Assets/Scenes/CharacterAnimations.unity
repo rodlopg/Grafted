@@ -1075,7 +1075,7 @@ MonoBehaviour:
   Right_Arm_Object: {fileID: 1088140938}
   Left_Leg_Object: {fileID: 1154318845}
   Right_Leg_Object: {fileID: 990169064}
-  detectionRadius: 1000
+  detectionRadius: 10
   bodyPartLayer:
     serializedVersion: 2
     m_Bits: 1
