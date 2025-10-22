@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class PlayerInteractions : MonoBehaviour, IDamageable
 {
     private const string ATTACK = "isAttackingRight";
+    private const string HIT = "isHit";
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator playerAnimator;
@@ -77,6 +78,7 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
         if(playerMovement.isDashing) return;
 
         this.health -= damage;
+        playerAnimator.SetTrigger(HIT);
         onPlayerHitUI?.Invoke(this, EventArgs.Empty);
 
         if (this.health < 0) {
