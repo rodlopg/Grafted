@@ -268,6 +268,7 @@ GameObject:
   m_Component:
   - component: {fileID: 60617733}
   - component: {fileID: 60617732}
+  - component: {fileID: 60617734}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -304,6 +305,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &60617734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 60617731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca9d4b108e16bb4e8962bba8b3848be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPartAssets:
+  - {fileID: 7677796467756686656, guid: 6005fbb2f17a5144f8ae5060f23a2001, type: 3}
+  - {fileID: 7123724207314807935, guid: e5384f53fb01744418895653c3b83301, type: 3}
+  - {fileID: 7104406451132618634, guid: 83dd322b0c3279c45bbaf8aa28907d28, type: 3}
+  - {fileID: 7356586689602321651, guid: fedf2272eec92794a950bd15058f56ad, type: 3}
+  - {fileID: 2314363458613626063, guid: 3d3cbc64c64175741ae1bd2ca0808832, type: 3}
+  - {fileID: 8035220590649655185, guid: 74e194ca538ac814c91dc4ef0f5c3e9e, type: 3}
+  - {fileID: 3237516903896178154, guid: dade4e9ec3df4e24fafb51a0b1caef53, type: 3}
+  - {fileID: 5487472581687849210, guid: 09eb443c42f6aef45ad9758669e80adf, type: 3}
+  - {fileID: 1257981856329229988, guid: a1379410d47382a4f9638def11b8f3c1, type: 3}
+  - {fileID: 6717822501916758861, guid: 81b7e90c567521648bce963c9424d780, type: 3}
+  - {fileID: 7618659938226009352, guid: bd40525018a44e3418aec13b4d1848f8, type: 3}
+  - {fileID: 7631370583756417911, guid: d86405cd3637daf42bfc2599b7fb4221, type: 3}
 --- !u!1 &70975473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1075,10 @@ MonoBehaviour:
   Right_Arm_Object: {fileID: 1088140938}
   Left_Leg_Object: {fileID: 1154318845}
   Right_Leg_Object: {fileID: 990169064}
+  detectionRadius: 1000
+  bodyPartLayer:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &469534291
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4148,6 +4178,10 @@ MonoBehaviour:
   Right_Arm_Object: {fileID: 1200459281}
   Left_Leg_Object: {fileID: 70975473}
   Right_Leg_Object: {fileID: 732114490}
+  detectionRadius: 2
+  bodyPartLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!95 &1355939637
 Animator:
   serializedVersion: 7

@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class MaterialCauseActions : MonoBehaviour, IDamageable
 {
@@ -39,6 +40,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     }
 
     public void death() {
+        SpawnBodyPart.SpawnRandomBodyPart(gameObject.transform.position);
         Destroy(gameObject);
     }
 

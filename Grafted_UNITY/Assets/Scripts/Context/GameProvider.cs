@@ -14,9 +14,10 @@ public class GameProvider : MonoBehaviour
     [SerializeField] private PlayerState P_State;
 
     // Handles grafting a new limb into the player
-    public Process Provide_Graft(Scriptable_BodyPart limb)
+    public Process Provide_Graft()
     {
         // Try to graft the new limb onto the player
+        Scriptable_BodyPart limb = P_State.CheckNearbyBodyParts();
         if (P_State.GraftLimb(limb) == Process.DONE)
         {
             // If graft succeeded, update the GameState with the last action performed

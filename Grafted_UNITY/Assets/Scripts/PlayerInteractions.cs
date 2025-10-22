@@ -14,6 +14,8 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackableLayer;
 
+    
+
     // Array with all hit objects
     private RaycastHit2D[] hits;
 
@@ -85,4 +87,6 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
     public void death() {
         Destroy(gameObject);
     }
+
+   
 }

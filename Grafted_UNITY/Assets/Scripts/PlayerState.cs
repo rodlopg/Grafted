@@ -14,6 +14,10 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Left_Leg_Object;
     [SerializeField] private GameObject Right_Leg_Object;
 
+    [Header("Body Part Detection")]
+    [SerializeField] private float detectionRadius = 2f;
+    [SerializeField] private LayerMask bodyPartLayer;
+
     // Dictionary mapping limb types to BodyPart objects
     private Dictionary<Limb, BodyPart> Body;
     
@@ -80,5 +84,23 @@ public class PlayerState : MonoBehaviour
         return Process.DONE;
     }
 
+    public Scriptable_BodyPart CheckNearbyBodyParts()
+    {
+        Collider2D[] nearby = Physics2D.OverlapCircleAll(transform.position, detectionRadius, bodyPartLayer);
+
+        foreach (Collider2D col in nearby)
+        {
+            // Assuming your prefab has a component linking to its ScriptableObject
+            Scriptable_BodyPart partInstance = col.GetComponent<Scriptable_BodyPart>();
+            if (partInstance != null)
+            {
+                Debug.Log($"Found body part: {partInstance.GetSlot()}");
+                return partInstance; // Return the associated Scriptable_BodyPart
+            }
+        }
+
+        Debug.Log("No body part found nearby.");
+        return null;
+    }
 
 }

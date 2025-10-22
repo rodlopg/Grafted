@@ -5,6 +5,7 @@ using Process = Actions.Process;          // Alias for Actions.Process enum
 using P_Action = Actions.PlayerAction;    // Alias for Actions.PlayerAction enum
 using P_Limb = Actions.PlayerLimb;        // Alias for Actions.PlayerLimb enum
 using Unity.VisualScripting;
+using UnityEditor;
 
 public class Scriptable_BodyPart : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Scriptable_BodyPart : MonoBehaviour
 
     // The sprite assigned to this body part
     [SerializeField] private Sprite sprite;
+    [SerializeField] private GameObject prefab;
+
 
     private void Awake()
     {
@@ -47,5 +50,10 @@ public class Scriptable_BodyPart : MonoBehaviour
     public P_Action GetAction()
     {
         return Actions.ActionTranslator[this.slot];
+    }
+
+    public GameObject GetPrefab()
+    {
+        return this.prefab;
     }
 }
