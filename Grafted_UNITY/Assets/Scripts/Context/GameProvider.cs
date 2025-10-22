@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
+using E_Action = Actions.EnemyAction;
 using Process = Actions.Process;
 
 public class GameProvider : MonoBehaviour
@@ -27,5 +28,34 @@ public class GameProvider : MonoBehaviour
         return Process.DONE; // Always returns DONE for now
     }
 
-    
+    public static Process Animate(Animator animator, P_Action playerAction=P_Action.NULL, E_Action enemyAction=E_Action.NULL)
+    {
+        List<string> conditions;
+
+        if (playerAction == P_Action.NULL)
+        {
+            E_Action action = enemyAction;
+            conditions = Actions.EnemyAnimations[action];
+            
+        }
+        else
+        {
+            P_Action action = playerAction;
+            conditions = Actions.PlayerAnimations[action];
+        }
+
+        if (conditions != null)
+        {
+            foreach (string c in conditions)
+            {
+                animator.SetTrigger(c);
+            }
+        }
+
+        return Process.DONE;
+    }
+    public static Process Animate(Animator animator, E_Action enemyAction)
+    {
+        return Animate(animator, P_Action.NULL, enemyAction);
+    }
 }

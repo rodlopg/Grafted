@@ -496,6 +496,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 199781897332039317, guid: 62bcabfa1140d49408d6f226ff025417, type: 3}
   playerTransform: {fileID: 469534288}
   projectileSpawnLocation: {fileID: 1489731431}
+  enemyAnimator: {fileID: 179017162}
 --- !u!61 &179017164
 BoxCollider2D:
   m_ObjectHideFlags: 0

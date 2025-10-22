@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using P_Action = Actions.PlayerAction;
+using G_Provider= GameProvider;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -79,15 +80,15 @@ public class PlayerMovement : MonoBehaviour
         // Trigger appropriate animation
         if (isMovingLeft)
         {
-            PlayerState.Animate(playerAnimator, P_Action.Left_Walk);
+            G_Provider.Animate(playerAnimator, P_Action.Left_Walk);
         }
         else if (isMovingRight)
         {
-            PlayerState.Animate(playerAnimator, P_Action.Right_Walk);
+            G_Provider.Animate(playerAnimator, P_Action.Right_Walk);
         }
         else
         {
-            PlayerState.Animate(playerAnimator, P_Action.Idle);
+            G_Provider.Animate(playerAnimator, P_Action.Idle);
         }
     }
 
@@ -97,7 +98,7 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded) {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
 
-            if (PlayerState.Animate(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
+            if (G_Provider.Animate(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
         }
     }
 
@@ -106,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
         if (context.performed && !isDashing && canDash) {
             StartCoroutine(dashRoutine());
-            if (PlayerState.Animate(playerAnimator, P_Action.Dash) == Actions.Process.DONE) return;
+            if (G_Provider.Animate(playerAnimator, P_Action.Dash) == Actions.Process.DONE) return;
         }
     }
 

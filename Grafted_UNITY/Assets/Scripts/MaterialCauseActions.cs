@@ -1,13 +1,18 @@
 using JetBrains.Annotations;
 using System;
+using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using static UnityEngine.EventSystems.EventTrigger;
+using E_Action = Actions.EnemyAction;
+using G_Provider = GameProvider;
 
 public class MaterialCauseActions : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform projectileSpawnLocation;
+    [SerializeField] private Animator enemyAnimator;
 
     // Boss stats
     public float health { get; private set; }
@@ -33,6 +38,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     public void takeDamage(float damage) {
         this.health -= damage;
         onBossHitUI?.Invoke(this, EventArgs.Empty);
+        if (G_Provider.Animate(enemyAnimator, E_Action.Take_Damage) == Actions.Process.DONE) return;
 
         if (this.health < 0) {
             death();

@@ -26,6 +26,7 @@ public class Actions : MonoBehaviour
     public enum PlayerAction
     {
         Idle,
+        Take_Damage,
         Dash,
         Right_Walk,
         Left_Walk,
@@ -38,6 +39,21 @@ public class Actions : MonoBehaviour
         Graft_Right_Arm,
         Graft_Left_Leg,
         Graft_Right_Leg,
+        NULL
+    }
+
+    public enum EnemyAction
+    {
+        Idle,
+        Take_Damage,
+        Die,
+        Dash,
+        Right_Walk,
+        Left_Walk,
+        Right_Attack,
+        Left_Attack,
+        Jump,
+        NULL
     }
 
     // Maps each limb to the corresponding graft action
@@ -54,6 +70,7 @@ public class Actions : MonoBehaviour
     public static Dictionary<PlayerAction, List<string>> PlayerAnimations= new Dictionary<PlayerAction, List<string>>
     {
         { PlayerAction.Idle, new List<string> { "isIdle" } },
+        { PlayerAction.Take_Damage, new List<string> { "isHit" } },
         { PlayerAction.Dash, new List<string> { "isDash" } },
         { PlayerAction.Right_Walk, new List<string> { "isWalking", "isMovingRight" } },
         { PlayerAction.Left_Walk, new List<string> { "isWalking", "isMovingLeft" } },
@@ -67,4 +84,18 @@ public class Actions : MonoBehaviour
         { PlayerAction.Graft_Left_Leg, new List<string> { "isGraftingLeftLeg" } },
         { PlayerAction.Graft_Right_Leg, new List<string> { "isGraftingRightLeg" } },
     };
+
+    public static Dictionary<EnemyAction, List<string>> EnemyAnimations = new Dictionary<EnemyAction, List<string>>
+    {
+        { EnemyAction.Idle, new List<string> { "isIdle" } },
+        { EnemyAction.Take_Damage, new List<string> { "isHit" } },
+        { EnemyAction.Die, new List<string> { "isDying" } },
+        { EnemyAction.Dash, new List<string> { "isDashing" } },
+        { EnemyAction.Right_Walk, new List<string> { "isWalking", "isMovingRight" } },
+        { EnemyAction.Left_Walk, new List<string> { "isWalking", "isMovingLeft" } },
+        { EnemyAction.Right_Attack, new List<string> { "isAttackingRight" } },
+        { EnemyAction.Left_Attack, new List<string> { "isAttackingLeft" } },
+        { EnemyAction.Jump, new List<string> { "isJumping" } }
+    };
+
 }
