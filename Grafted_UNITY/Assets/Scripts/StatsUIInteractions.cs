@@ -49,11 +49,13 @@ public class StatsUIInteractions : MonoBehaviour
     {
         if (activeStats)
         {
+            Time.timeScale = 1.0f;
             activeStats = false;
             StatsUI.gameObject.SetActive(activeStats);
         }
         else
         {
+            Time.timeScale = 0.0f;
             activeStats = true;
             StatsUI.gameObject.SetActive(activeStats);
             activePause = false;
@@ -66,11 +68,13 @@ public class StatsUIInteractions : MonoBehaviour
     {
         if (activePause)
         {
+            Time.timeScale = 1.0f;
             activePause = false;
             PauseUI.gameObject.SetActive(activePause);
         }
         else
         {
+            Time.timeScale = 0.0f;
             activeStats = false;
             StatsUI.gameObject.SetActive(activeStats);
             activePause = true;
