@@ -102,6 +102,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Crouch event
+    public void Crouch(InputAction.CallbackContext context)
+    {
+        // Only if the player is grounded he is allowed to jump
+        if (context.performed)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce);
+
+            if (G_Provider.Animate(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
+        }
+    }
+
     // Dash event
     public void Dash(InputAction.CallbackContext context) {
         // If the player has touched the floor so their dash is available (canDash), apply the dash coroutine
