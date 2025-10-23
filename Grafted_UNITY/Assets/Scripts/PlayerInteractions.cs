@@ -22,13 +22,17 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
 
     // Entity attributes
     public float health { get; private set; }
-    private float attackPower = 0.05f;
-    private float attackCooldown = 0.5f;
+
+    public float attackPower = 0.05f;
+
+    public float attackCooldown = 0.5f;
     private bool canAttack = true;
 
     // Event that fires when player gets hit
     public static event EventHandler onPlayerHitUI;
-            
+    public static event EventHandler onPlayerSpeedChange;
+    public static event EventHandler onPlayerStrengthChange;
+
     void Start()
     {
         health = 1f;
@@ -90,5 +94,16 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
-   
+    public void changeSpeed(float speed) { 
+        this.attackCooldown = speed;
+        onPlayerSpeedChange?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void changeStrength(float strength)
+    {
+        this.attackPower = strength;
+        onPlayerStrengthChange?.Invoke(this, EventArgs.Empty);
+    }
+
+
 }

@@ -13,6 +13,9 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Right_Arm_Object;
     [SerializeField] private GameObject Left_Leg_Object;
     [SerializeField] private GameObject Right_Leg_Object;
+    [SerializeField] private PlayerInteractions P_Interactions;
+
+
 
     [Header("Body Part Detection")]
     [SerializeField] private float detectionRadius = 2f;
@@ -40,6 +43,8 @@ public class PlayerState : MonoBehaviour
     public Process GraftLimb(Scriptable_BodyPart newLimb)
     {
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
+        P_Interactions.changeSpeed(Random.Range(0.01f, 1f));
+        P_Interactions.changeStrength(Random.Range(0.01f, 1f));
         return Process.DONE;
     }
 
