@@ -94,6 +94,7 @@ public class PlayerState : MonoBehaviour
             Scriptable_BodyPart partInstance = col.GetComponent<Scriptable_BodyPart>();
             if (partInstance != null)
             {
+                
                 Debug.Log($"Found body part: {partInstance.GetSlot()}");
                 return partInstance; // Return the associated Scriptable_BodyPart
             }

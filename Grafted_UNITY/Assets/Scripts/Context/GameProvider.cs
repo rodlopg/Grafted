@@ -2,9 +2,11 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using E_Action = Actions.EnemyAction;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
-using E_Action = Actions.EnemyAction;
 using Process = Actions.Process;
 
 public class GameProvider : MonoBehaviour
@@ -13,7 +15,19 @@ public class GameProvider : MonoBehaviour
     [SerializeField] private GameState G_State;
     // Reference to the PlayerState (MonoBehaviour managing current body parts)
     [SerializeField] private PlayerState P_State;
+    [SerializeField] private Image E_Key;
 
+    public void Update()
+    {
+        if(P_State.CheckNearbyBodyParts() != null)
+        {
+            Show_E_Key();
+        }
+        else
+        {
+            Hide_E_Key();
+        }
+    }
     // Handles grafting a new limb into the player
     public Process Provide_Graft()
     {
@@ -57,5 +71,19 @@ public class GameProvider : MonoBehaviour
     public static Process Animate(Animator animator, E_Action enemyAction)
     {
         return Animate(animator, P_Action.NULL, enemyAction);
+    }
+
+    public Process Show_E_Key()
+    {
+        E_Key.gameObject.SetActive(true);
+
+        return Process.DONE;
+    }
+
+    public Process Hide_E_Key()
+    {
+        E_Key.gameObject.SetActive(false);
+
+        return Process.DONE;
     }
 }

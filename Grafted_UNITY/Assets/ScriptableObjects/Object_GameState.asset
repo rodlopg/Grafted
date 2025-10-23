@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bed3075622c40d4ab23d6004a15305e, type: 3}
   m_Name: Object_GameState
   m_EditorClassIdentifier: 
+  E_Key_Renderer: {fileID: 5672111201027005988, guid: c9425e79f0d037f41bc4433ded72b5d2, type: 3}
+  UI: {fileID: 0}

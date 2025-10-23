@@ -8,6 +8,7 @@ public class GameState : ScriptableObject
 {
     // Reference to the player state (not actively used here)
     private PlayerState PlayerState;
+   
 
     // Last action the player performed
     private static Actions.PlayerAction LastPlayerAction;

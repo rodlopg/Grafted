@@ -38,11 +38,11 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     public void takeDamage(float damage) {
         this.health -= damage;
         onBossHitUI?.Invoke(this, EventArgs.Empty);
-        if (G_Provider.Animate(enemyAnimator, E_Action.Take_Damage) == Actions.Process.DONE) return;
+        
 
         if (this.health < 0) {
             death();
-        }
+        }else if (G_Provider.Animate(enemyAnimator, E_Action.Take_Damage) == Actions.Process.DONE) return;
     }
 
     public void death() {
