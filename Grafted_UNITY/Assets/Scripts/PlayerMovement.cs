@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce = 10f;
     private float dashForce = 15f;
     private float dashDuration = 0.2f;
+
+    private bool isSprint = false;
     private bool isGrounded = false;
     public bool isDashing { get; private set; }
     private bool canDash = true;
@@ -89,6 +91,8 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             G_Provider.Animate(playerAnimator, P_Action.Idle);
+            moveSpeed = 5f;
+            isSprint = false;
         }
     }
 
@@ -111,6 +115,17 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, -jumpForce);
 
             if (G_Provider.Animate(playerAnimator, P_Action.Jump) == Actions.Process.DONE) return;
+        }
+    }
+
+    // Sprint event
+    public void Sprint(InputAction.CallbackContext context)
+    {
+        // Only if the player is grounded he is allowed to jump
+        if (context.performed && !isSprint)
+        {
+            moveSpeed *= 2f;
+            isSprint = true;
         }
     }
 
