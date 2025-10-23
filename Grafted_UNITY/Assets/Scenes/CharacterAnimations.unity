@@ -1327,7 +1327,7 @@ MonoBehaviour:
   Right_Arm_Object: {fileID: 1088140938}
   Left_Leg_Object: {fileID: 1154318845}
   Right_Leg_Object: {fileID: 990169064}
-  detectionRadius: 10
+  detectionRadius: 2
   bodyPartLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -1609,8 +1609,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.15686275, g: 0, b: 0, a: 1}
+      key1: {r: 0.9960785, g: 0, b: 0.14509805, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
