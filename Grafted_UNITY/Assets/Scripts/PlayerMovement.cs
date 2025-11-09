@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Player movement stats
     private float moveSpeed = 5f;
-    private float jumpForce = 10f;
+    [SerializeField] private float jumpForce = 20f;
     private float dashForce = 15f;
     private float dashDuration = 0.2f;
 
