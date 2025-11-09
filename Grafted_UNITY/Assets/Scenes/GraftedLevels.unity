@@ -1967,7 +1967,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &344250107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6311,7 +6311,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1741213585178555695, guid: 103dcab05209a3448af93708c7dd3e8c, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 739a3df2d52cec749ad2fef1a45703c0, type: 3}
+  m_Resource: {fileID: 8300000, guid: 2470eb486c8130d4c9d1847bb06bdd51, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -11090,6 +11090,71 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &7289384129895665455
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 38.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.14778008
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3432298083708317248, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4186614830101930092, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 2060286495}
+    - target: {fileID: 4627933763792529814, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 06d834f3dccfe934cb52d9bfdeac09aa, type: 2}
+    - target: {fileID: 7325850784680437878, guid: c1704e68ffebba344b57071166b6785a, type: 3}
+      propertyPath: m_Name
+      value: Saunter
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c1704e68ffebba344b57071166b6785a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -11103,6 +11168,7 @@ SceneRoots:
   - {fileID: 453753227}
   - {fileID: 1607877050}
   - {fileID: 2060286495}
+  - {fileID: 7289384129895665455}
   - {fileID: 50913828}
   - {fileID: 1952722684}
   - {fileID: 1334429834}

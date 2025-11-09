@@ -1,10 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using P_Action = Actions.PlayerAction;
 using G_Provider= GameProvider;
 
@@ -37,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     // Default directions
     private Vector2 moveDirection;
     private Vector2 lastDirection = Vector2.right;
+    private bool isFacingRight = true;
+    public bool getIsFacingRight() { return isFacingRight; }
 
     private void Awake() {
         // Enabling the default/general controls
@@ -62,17 +60,18 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Update() {
+        moveDirection = playerInputActions.General.Movement.ReadValue<Vector2>();
+
         // If the player is not dashing, adjust position as normal with the moveDirection vector
         if (!isDashing) {
             rb.linearVelocity = new Vector2(moveDirection.x * moveSpeed, rb.linearVelocity.y);
         }
 
-        moveDirection = playerInputActions.General.Movement.ReadValue<Vector2>();
-
         // Store the last direction for dashing
         if (Mathf.Abs(moveDirection.x) > 0.01f)
         {
             lastDirection = new Vector2(Mathf.Sign(moveDirection.x), 0);
+            if ((lastDirection.x > 0 && !isFacingRight) || (lastDirection.x < 0 && isFacingRight)) flip();
         }
 
         // Check if the player is moving
@@ -197,5 +196,14 @@ public class PlayerMovement : MonoBehaviour
         rb.gravityScale = prevGravity;
         tr.emitting = false;
         isDashing = false;
+    }
+
+    // Flip the character and its animations
+    private void flip() {
+        isFacingRight = !isFacingRight;
+
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
     }
 }

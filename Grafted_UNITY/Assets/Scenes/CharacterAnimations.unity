@@ -1855,6 +1855,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   playerAnimator: {fileID: 469534289}
+  jumpForce: 20
+  groundCheckDistance: 0.87
 --- !u!114 &469534292
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 public class PlayerInteractions : MonoBehaviour, IDamageable
 {
@@ -15,7 +14,7 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
     [SerializeField] private float attackRange = 1f;
     [SerializeField] private LayerMask attackableLayer;
 
-    
+
 
     // Array with all hit objects
     private RaycastHit2D[] hits;
@@ -57,12 +56,16 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
             playerAnimator.SetTrigger(ATTACK);
 
             canAttack = false;
-            
+
             // Hitbox 
-            hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, transform.right, 0, attackableLayer);
+            Vector2 attackDirection = playerMovement.getIsFacingRight() ? Vector2.right : Vector2.left;
+            hits = Physics2D.CircleCastAll(attackTransform.position, attackRange, attackDirection, 0, attackableLayer);
 
             // Apply damage to all attackable objects
             for (int i = 0; i < hits.Length; i++) {
+                // If the collider is a trigger, its the deteciton radius, not the actual hitbox
+                if (hits[i].collider.isTrigger) continue;
+
                 IDamageable damagableObject = hits[i].collider.GetComponentInParent<IDamageable>();
                 damagableObject.takeDamage(this.attackPower);
             }
