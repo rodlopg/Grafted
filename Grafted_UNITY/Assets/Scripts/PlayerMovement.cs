@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private bool canDash = true;
 
     // Distance for every raycast in order to check if the player is touching the ground
-    private float groundCheckDistance = 0.87f;
+    [SerializeField] private float groundCheckDistance = 0.87f;
 
     // Default directions
     private Vector2 moveDirection;
