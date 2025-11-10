@@ -74,7 +74,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Reverse_Pixel Background 3
-  m_Speed: -5
+  m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8683284959009990591}
@@ -101,7 +101,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Pixel Background 2
-  m_Speed: 5
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5580066015568108773}

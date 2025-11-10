@@ -113,6 +113,7 @@ public class Enemy : MonoBehaviour, IDamageable
     }
 
     public void death() {
+        SpawnBodyPart.SpawnRandomBodyPart(gameObject.transform.position);
         Destroy(gameObject);    
     }
 
