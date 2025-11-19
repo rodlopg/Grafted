@@ -11,6 +11,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 {
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform projectileSpawnLocation;
     [SerializeField] private Animator enemyAnimator;
 
@@ -19,6 +20,9 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     private float attackCooldown = 2f;
 
     public static event EventHandler onBossHitUI;
+    public static event EventHandler onBossDeathUI;
+
+    private bool playerInRange = false;
 
     void Start()
     {
@@ -27,6 +31,8 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 
     // Projectile attack every 3 seconds
     void Update() {
+        if (!playerInRange) return;
+
         attackCooldown -= Time.deltaTime;
         if(attackCooldown < 0) {
             projectileAttack();
@@ -40,7 +46,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
         onBossHitUI?.Invoke(this, EventArgs.Empty);
         
 
-        if (this.health < 0) {
+        if (this.health <= 0f) {
             death();
         }else if (G_Provider.Animate(enemyAnimator, E_Action.Take_Damage) == Actions.Process.DONE) return;
     }
@@ -54,5 +60,23 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     private void projectileAttack() {
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation.position, projectileSpawnLocation.rotation);
         projectile.GetComponent<MaterialCauseProjectileLogic>().playerTransform = playerTransform;
+    }
+
+    // For detection that the player is within the boss arena
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
+        {
+            playerInRange = false;
+            attackCooldown = 2f;
+        }
     }
 }

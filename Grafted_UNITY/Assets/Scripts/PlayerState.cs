@@ -1,8 +1,9 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Process = Actions.Process;
+using UnityEngine;
+using static Actions;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
+using Process = Actions.Process;
 
 public class PlayerState : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Left_Leg_Object;
     [SerializeField] private GameObject Right_Leg_Object;
     [SerializeField] private PlayerInteractions P_Interactions;
+    [SerializeField] private Animator animator;
 
 
 
@@ -23,7 +25,10 @@ public class PlayerState : MonoBehaviour
 
     // Dictionary mapping limb types to BodyPart objects
     private Dictionary<Limb, BodyPart> Body;
-    
+
+    // Maps each limb to the corresponding graft action
+    public Dictionary<PlayerLimb, AnimationClip> AnimationTranslator;
+
 
 
     private void Awake()
@@ -37,12 +42,14 @@ public class PlayerState : MonoBehaviour
             { Limb.Left_Leg, new BodyPart(Limb.Left_Leg, Left_Leg_Object) },
             { Limb.Right_Leg, new BodyPart(Limb.Right_Leg, Right_Leg_Object) }
         };
+
     }
 
     // Grafts a new limb by swapping its sprite
     public Process GraftLimb(Scriptable_BodyPart newLimb)
     {
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
+        Body[newLimb.GetSlot()].GetRenderer().color = Color.red;
         P_Interactions.changeSpeed(Random.Range(0.01f, 1f));
         P_Interactions.changeStrength(Random.Range(0.01f, 1f));
         return Process.DONE;
@@ -107,6 +114,11 @@ public class PlayerState : MonoBehaviour
 
         Debug.Log("No body part found nearby.");
         return null;
+    }
+
+    public Process Show(Limb limb) {
+        this.animator.Play(Actions.AnimationTranslator[limb]);
+        return Process.DONE;
     }
 
 }

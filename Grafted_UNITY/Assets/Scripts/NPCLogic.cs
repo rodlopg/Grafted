@@ -13,6 +13,11 @@ public class NPCLogic : MonoBehaviour
     [SerializeField] private string tip;
     [SerializeField] private bool canInteract;
 
+    private void Start()
+    {
+        tipBubble.gameObject.SetActive(false);
+
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

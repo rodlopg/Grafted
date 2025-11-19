@@ -7,6 +7,7 @@ public class BodyPart : ScriptableObject
 {
     // Limb slot this body part belongs to (e.g., head, torso, arm, etc.)
     [SerializeField] private P_Limb slot;
+    [SerializeField] private Animation showAnimation;
 
     // The actual GameObject in the scene representing this limb
     private GameObject LimbObject;
@@ -49,5 +50,22 @@ public class BodyPart : ScriptableObject
     public P_Action GetAction()
     {
         return Actions.ActionTranslator[this.slot];
+    }
+
+    public Process ChangeColor(Color newColor)
+    {
+        this.Renderer.color = newColor;
+        return Process.DONE;
+    }
+
+    public Process Show()
+    {
+        this.showAnimation.Play();
+        return Process.DONE;
+    }
+    public Process Stop_Show()
+    {
+        this.showAnimation.Stop();
+        return Process.DONE;
     }
 }

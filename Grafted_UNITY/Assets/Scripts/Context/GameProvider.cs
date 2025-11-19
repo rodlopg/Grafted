@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,15 +17,35 @@ public class GameProvider : MonoBehaviour
     // Reference to the PlayerState (MonoBehaviour managing current body parts)
     [SerializeField] private PlayerState P_State;
     [SerializeField] private Image E_Key;
+    private Scriptable_BodyPart lastLimb = null;
+    [SerializeField] private Color targetColor = Color.red;
+
+    public static EventHandler<BodyPartEventArgs> onBodyPartDetection;
+
+    public class BodyPartEventArgs : EventArgs
+    {
+        public Limb Slot { get; private set; }
+
+        public BodyPartEventArgs(Limb slot)
+        {
+            Slot = slot;
+        }
+    }
 
     public void Update()
     {
-        if(P_State.CheckNearbyBodyParts() != null)
+        Scriptable_BodyPart limb = P_State.CheckNearbyBodyParts();
+        onBodyPartDetection?.Invoke(this, new BodyPartEventArgs(limb.GetSlot()));
+        if (limb != null)
         {
+            lastLimb = limb;
             Show_E_Key();
+            P_State.Show(limb.GetSlot());
+            Debug.Log("Changing color of -> " + P_State.GetBody()[limb.GetSlot()].GetSlot());
         }
         else
         {
+            P_State.GetBody()[lastLimb.GetSlot()].Stop_Show();
             Hide_E_Key();
         }
     }

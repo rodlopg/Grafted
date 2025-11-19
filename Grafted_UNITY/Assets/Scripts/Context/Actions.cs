@@ -39,6 +39,12 @@ public class Actions : MonoBehaviour
         Graft_Right_Arm,
         Graft_Left_Leg,
         Graft_Right_Leg,
+        Show_Head,
+        Show_Torso,
+        Show_Left_Arm,
+        Show_Right_Arm,
+        Show_Left_Leg,
+        Show_Right_Leg,
         NULL
     }
 
@@ -65,6 +71,17 @@ public class Actions : MonoBehaviour
         { PlayerLimb.Right_Arm, PlayerAction.Graft_Right_Arm },
         { PlayerLimb.Left_Leg, PlayerAction.Graft_Left_Leg },
         { PlayerLimb.Right_Leg, PlayerAction.Graft_Right_Leg },
+    };
+
+    // Maps each limb to the corresponding graft action
+    public static Dictionary<PlayerLimb, string> AnimationTranslator = new Dictionary<PlayerLimb, string>
+    {
+        { PlayerLimb.Head, "ShowHead" },
+        { PlayerLimb.Torso, "ShowTorso" },
+        { PlayerLimb.Left_Arm, "ShowLeftArm" },
+        { PlayerLimb.Right_Arm, "ShowRightArm" },
+        { PlayerLimb.Left_Leg, "ShowLeftLeg" },
+        { PlayerLimb.Right_Leg, "ShowRightLeg" },
     };
 
     public static Dictionary<PlayerAction, List<string>> PlayerAnimations= new Dictionary<PlayerAction, List<string>>
