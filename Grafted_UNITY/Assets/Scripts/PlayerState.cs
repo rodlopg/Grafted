@@ -68,10 +68,13 @@ public class PlayerState : MonoBehaviour
     // Grafts a new limb by swapping its sprite
     public Process GraftLimb(Scriptable_BodyPart newLimb)
     {
+        Sprite copy = Body[newLimb.GetSlot()].GetSprite();
+
         Body[newLimb.GetSlot()].Graft(newLimb.GetSprite());
-        Body[newLimb.GetSlot()].GetRenderer().color = Color.red;
         P_Interactions.changeSpeed(Random.Range(0.01f, 1f));
         P_Interactions.changeStrength(Random.Range(0.01f, 1f));
+
+        newLimb.SetSprite(copy);
         return Process.DONE;
     }
 

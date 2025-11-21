@@ -11,6 +11,7 @@ public class BossFightUIActions : MonoBehaviour
     [SerializeField] private PlayerState P_State;
     [SerializeField] private Image playerHealthBar;
     [SerializeField] private Image bossHealthBar;
+    [SerializeField] private Image E_Key;
     [SerializeField] private Image[] Vitruvian;
     // Maps each limb to the corresponding graft action
     public static Dictionary<PlayerLimb, Image> VitruvianTranslator;
@@ -61,6 +62,7 @@ public class BossFightUIActions : MonoBehaviour
                 img.color = Color.white;
 
             uLastLimb = Limb.NULL;
+            Hide_E_Key();
             return;
         }
 
@@ -70,10 +72,24 @@ public class BossFightUIActions : MonoBehaviour
 
         // 3. Paint only the closest limb in green
         VitruvianTranslator[e.Slot].color = Color.green;
+        Show_E_Key();
 
         // 4. Remember last limb
         uLastLimb = e.Slot;
     }
 
+    public Process Show_E_Key()
+    {
+        E_Key.gameObject.SetActive(true);
+
+        return Process.DONE;
+    }
+
+    public Process Hide_E_Key()
+    {
+        E_Key.gameObject.SetActive(false);
+
+        return Process.DONE;
+    }
 
 }

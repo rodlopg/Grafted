@@ -16,7 +16,7 @@ public class GameProvider : MonoBehaviour
     [SerializeField] private GameState G_State;
     // Reference to the PlayerState (MonoBehaviour managing current body parts)
     [SerializeField] private PlayerState P_State;
-    [SerializeField] private Image E_Key;
+    
     private Scriptable_BodyPart lastLimb = null;
     [SerializeField] private Color targetColor = Color.red;
 
@@ -28,14 +28,12 @@ public class GameProvider : MonoBehaviour
         if (limb != null)
         {
             lastLimb = limb;
-            Show_E_Key();
             P_State.Show(limb.GetSlot());
             Debug.Log("Changing color of -> " + P_State.GetBody()[limb.GetSlot()].GetSlot());
         }
         else
         {
             P_State.GetBody()[lastLimb.GetSlot()].Stop_Show();
-            Hide_E_Key();
         }
     }
     // Handles grafting a new limb into the player
@@ -83,17 +81,5 @@ public class GameProvider : MonoBehaviour
         return Animate(animator, P_Action.NULL, enemyAction);
     }
 
-    public Process Show_E_Key()
-    {
-        E_Key.gameObject.SetActive(true);
-
-        return Process.DONE;
-    }
-
-    public Process Hide_E_Key()
-    {
-        E_Key.gameObject.SetActive(false);
-
-        return Process.DONE;
-    }
+    
 }

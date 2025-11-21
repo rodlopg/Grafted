@@ -15,17 +15,17 @@ public class Scriptable_BodyPart : MonoBehaviour
     // The sprite assigned to this body part
     [SerializeField] private Sprite sprite;
     [SerializeField] private GameObject prefab;
-
+    private SpriteRenderer sRenderer;
 
     private void Awake()
     {
         // Try to get a SpriteRenderer component on the same GameObject
-        var renderer = gameObject.GetComponent<SpriteRenderer>();
+        sRenderer = gameObject.GetComponent<SpriteRenderer>();
 
-        if (renderer != null)
+        if (sRenderer != null)
         {
             // If found, assign the serialized sprite to it
-            renderer.sprite = this.sprite;
+            sRenderer.sprite = this.sprite;
         }
         else
         {
@@ -46,6 +46,12 @@ public class Scriptable_BodyPart : MonoBehaviour
         return this.sprite;
     }
 
+    public Process SetSprite(Sprite sprite)
+    {
+        this.sprite = sprite;
+        sRenderer.sprite = sprite;
+        return Process.DONE;
+    }
     // Returns the PlayerAction associated with this limb
     public P_Action GetAction()
     {

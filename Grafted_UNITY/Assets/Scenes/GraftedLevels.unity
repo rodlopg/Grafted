@@ -5767,7 +5767,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   G_State: {fileID: 11400000, guid: 01317213ec6b4c94ea27bc196a258c32, type: 2}
   P_State: {fileID: 2060286493}
-  E_Key: {fileID: 73180740}
   targetColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!4 &829896137
 Transform:
@@ -8047,6 +8046,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Object_Torso_01
       objectReference: {fileID: 0}
+    - target: {fileID: 2258502537091450464, guid: bd40525018a44e3418aec13b4d1848f8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6556699229221047487, guid: bd40525018a44e3418aec13b4d1848f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: -66.911316
@@ -9390,8 +9393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c3946800e11b54591064ac78ebfcb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  P_State: {fileID: 2060286493}
   playerHealthBar: {fileID: 154209608}
   bossHealthBar: {fileID: 1724330938}
+  E_Key: {fileID: 73180740}
   Vitruvian:
   - {fileID: 529862186}
   - {fileID: 874735048}
@@ -13858,8 +13863,8 @@ MonoBehaviour:
   Right_Leg_Object: {fileID: 191119851}
   P_Interactions: {fileID: 2060286494}
   animator: {fileID: 2060286496}
-  circleCollider: {fileID: 0}
-  detectionRadius: 2
+  circleCollider: {fileID: 2060286503}
+  detectionRadius: 1
   bodyPartLayer:
     serializedVersion: 2
     m_Bits: 1
@@ -14366,7 +14371,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 11.449999
+  m_Radius: 1
 --- !u!1 &2064787823
 GameObject:
   m_ObjectHideFlags: 0
