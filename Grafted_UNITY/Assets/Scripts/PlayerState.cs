@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.IK;
 using static Actions;
+using static GameProvider;
 using Limb = Actions.PlayerLimb;
 using P_Action = Actions.PlayerAction;
 using Process = Actions.Process;
+using Random = UnityEngine.Random;
 
 public class PlayerState : MonoBehaviour
 {
@@ -16,6 +20,9 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private GameObject Right_Leg_Object;
     [SerializeField] private PlayerInteractions P_Interactions;
     [SerializeField] private Animator animator;
+    [SerializeField] private CircleCollider2D circleCollider;
+    private Scriptable_BodyPart lastDetectedPart;
+
 
 
 
@@ -31,8 +38,21 @@ public class PlayerState : MonoBehaviour
 
 
 
+    public static EventHandler<BodyPartEventArgs> onBodyPartDetection;
+
+    public class BodyPartEventArgs : EventArgs
+    {
+        public Limb Slot { get; private set; }
+
+        public BodyPartEventArgs(Limb slot)
+        {
+            Slot = slot;
+        }
+    }
+
     private void Awake()
     {
+        circleCollider.radius = detectionRadius;
         // Initialize the dictionary with body part instances
         Body = new Dictionary<Limb, BodyPart>{ 
             { Limb.Head, new BodyPart(Limb.Head, Head_Object) },
@@ -96,6 +116,7 @@ public class PlayerState : MonoBehaviour
         return Process.DONE;
     }
 
+    /*
     public Scriptable_BodyPart CheckNearbyBodyParts()
     {
         Collider2D[] nearby = Physics2D.OverlapCircleAll(transform.position, detectionRadius, bodyPartLayer);
@@ -115,10 +136,49 @@ public class PlayerState : MonoBehaviour
         Debug.Log("No body part found nearby.");
         return null;
     }
+    */
+
+    public Scriptable_BodyPart CheckNearbyBodyParts()
+    {
+        if (lastDetectedPart != null)
+        {
+            return lastDetectedPart;
+        }
+
+        Debug.Log("No body part found nearby (trigger).");
+        return null;
+    }
+
 
     public Process Show(Limb limb) {
+        if (limb != this.lastDetectedPart.GetSlot()) { 
+
+        }
         this.animator.Play(Actions.AnimationTranslator[limb]);
         return Process.DONE;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var part = collision.GetComponent<Scriptable_BodyPart>();
+        if (part != null)
+        {
+            lastDetectedPart = part;
+            onBodyPartDetection?.Invoke(this, new BodyPartEventArgs(part.GetSlot()));
+            Debug.Log($"Detected body part: {part.GetSlot()}");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        var part = collision.GetComponent<Scriptable_BodyPart>();
+        if (part != null && part == lastDetectedPart)
+        {
+            Debug.Log("Body part left detection area");
+            lastDetectedPart = null;
+            onBodyPartDetection?.Invoke(this, new BodyPartEventArgs(Limb.NULL));
+        }
+    }
+
 
 }

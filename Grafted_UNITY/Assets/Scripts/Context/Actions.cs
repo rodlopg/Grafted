@@ -20,6 +20,7 @@ public class Actions : MonoBehaviour
         Right_Arm,
         Left_Leg,
         Right_Leg,
+        NULL
     }
 
     // Different possible player actions

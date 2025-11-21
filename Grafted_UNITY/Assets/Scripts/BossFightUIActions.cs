@@ -1,16 +1,20 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static Actions;
 using static GameProvider;
+using static PlayerState;
+using Limb = Actions.PlayerLimb;
 
 public class BossFightUIActions : MonoBehaviour
 {
+    [SerializeField] private PlayerState P_State;
     [SerializeField] private Image playerHealthBar;
     [SerializeField] private Image bossHealthBar;
     [SerializeField] private Image[] Vitruvian;
     // Maps each limb to the corresponding graft action
     public static Dictionary<PlayerLimb, Image> VitruvianTranslator;
+    private Limb uLastLimb = Limb.NULL;
 
     // Listen to when the player or the boss gets hit
     void Start()
@@ -27,7 +31,7 @@ public class BossFightUIActions : MonoBehaviour
 
         PlayerInteractions.onPlayerHitUI += PlayerInteractions_onPlayerHitUI;
         MaterialCauseActions.onBossHitUI += MaterialCauseActions_onBossHitUI;
-        GameProvider.onBodyPartDetection += GameProvider_onBodyPartDetection;
+        PlayerState.onBodyPartDetection += PlayerState_onBodyPartDetection;
     }
 
     // Adjust the boss health bar in the UI
@@ -48,9 +52,28 @@ public class BossFightUIActions : MonoBehaviour
         playerHealthBar.fillAmount = playerHealth;
     }
 
-    private void GameProvider_onBodyPartDetection(object sender, BodyPartEventArgs e)
+    private void PlayerState_onBodyPartDetection(object sender, BodyPartEventArgs e)
     {
+        // 1. If no limb detected → reset ALL to white
+        if (e.Slot == Limb.NULL)
+        {
+            foreach (var img in VitruvianTranslator.Values)
+                img.color = Color.white;
+
+            uLastLimb = Limb.NULL;
+            return;
+        }
+
+        // 2. Reset ALL to white first
+        foreach (var img in VitruvianTranslator.Values)
+            img.color = Color.white;
+
+        // 3. Paint only the closest limb in green
         VitruvianTranslator[e.Slot].color = Color.green;
+
+        // 4. Remember last limb
+        uLastLimb = e.Slot;
     }
+
 
 }

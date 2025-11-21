@@ -20,22 +20,11 @@ public class GameProvider : MonoBehaviour
     private Scriptable_BodyPart lastLimb = null;
     [SerializeField] private Color targetColor = Color.red;
 
-    public static EventHandler<BodyPartEventArgs> onBodyPartDetection;
-
-    public class BodyPartEventArgs : EventArgs
-    {
-        public Limb Slot { get; private set; }
-
-        public BodyPartEventArgs(Limb slot)
-        {
-            Slot = slot;
-        }
-    }
 
     public void Update()
     {
         Scriptable_BodyPart limb = P_State.CheckNearbyBodyParts();
-        onBodyPartDetection?.Invoke(this, new BodyPartEventArgs(limb.GetSlot()));
+        
         if (limb != null)
         {
             lastLimb = limb;
