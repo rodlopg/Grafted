@@ -117,29 +117,29 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: castle_entrance
+      name: castle_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 65
-        width: 133
-        height: 14
+        y: 0
+        width: 160
+        height: 288
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cecc6b71e5348443964f737002ccd1e
-      internalID: 1415557859
+      spriteID: 2c3f37e613889624b985b50244382b34
+      internalID: -1939881440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: castle_window
+      name: castle_1
       rect:
         serializedVersion: 2
         x: 176
@@ -147,21 +147,21 @@ TextureImporter:
         width: 96
         height: 288
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a262dac503ab40847b041fc142906cdc
-      internalID: -1786772195
+      spriteID: 684424f3dcea83346a7ae55aa1b2fae7
+      internalID: -1320351593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: castle_wall
+      name: castle_2
       rect:
         serializedVersion: 2
         x: 288
@@ -169,21 +169,21 @@ TextureImporter:
         width: 80
         height: 288
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 65cb656dbc306c74783e929d3ed94753
-      internalID: -1052250243
+      spriteID: ba915b883f6348f47839dff744e45ef7
+      internalID: -1062133397
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: banner
+      name: castle_3
       rect:
         serializedVersion: 2
         x: 388
@@ -191,15 +191,15 @@ TextureImporter:
         width: 42
         height: 56
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 926902a075649f9428f01783bbbc0f8e
-      internalID: 2043738051
+      spriteID: edc994826b1cc8548afada254d76eb21
+      internalID: 786520684
       vertices: []
       indices: 
       edges: []
@@ -218,10 +218,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      banner: 2043738051
-      castle_entrance: 1415557859
-      castle_wall: -1052250243
-      castle_window: -1786772195
+      castle_0: -1939881440
+      castle_1: -1320351593
+      castle_2: -1062133397
+      castle_3: 786520684
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
