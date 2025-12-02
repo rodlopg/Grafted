@@ -26,14 +26,13 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
         transform.position += moveDir * projectileSpeed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         // To theck for the same layer mask as the player's and applly damage to them
         if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
             PlayerInteractions playerInteraction = collision.gameObject.GetComponent<PlayerInteractions>();
             playerInteraction.takeDamage(projectileDamage);
             Destroy(gameObject);
         }
-
     }
 
     // Damage taken and death functions for this projectile
