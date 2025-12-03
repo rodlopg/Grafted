@@ -9,7 +9,11 @@ public class EfficientCauseActions : MonoBehaviour, IDamageable {
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform projectileSpawnLocation;
     [SerializeField] private Animator enemyAnimator;
-    [SerializeField] private ParticleSystem arenaParticles;      
+    [SerializeField] private ParticleSystem arenaParticles;
+    [SerializeField] private AudioClip formalAreaMusic;
+
+    public void startParticleSystem() { arenaParticles.Play(); }
+    public void stopParticleSystem() { arenaParticles.Stop(); }
 
     public float health { get; private set; }
     private float attackCooldown = 2f;
@@ -17,11 +21,11 @@ public class EfficientCauseActions : MonoBehaviour, IDamageable {
     public static event EventHandler onBossHitUI;
     public static event EventHandler onBossDeathUI;
 
-    private bool playerInRange = false;
+    public bool playerInRange = false;
 
     void Start() {
         health = 2f;
-        arenaParticles.Stop();
+        stopParticleSystem();
     }
 
     void Update() {
@@ -46,30 +50,15 @@ public class EfficientCauseActions : MonoBehaviour, IDamageable {
 
     public void death() {
         SpawnBodyPart.SpawnRandomBodyPart(transform.position);
+        SoundManager.Instance.changeMusic(formalAreaMusic);
         Destroy(gameObject);
     }
 
     // Shoot the snowball projectile
     private void projectileAttack() {
-        GameObject projectile =
-            Instantiate(projectilePrefab, projectileSpawnLocation.position, projectileSpawnLocation.rotation);
+        GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation.position, projectileSpawnLocation.rotation);
 
         // Assign the player reference to the snowball script
-        projectile.GetComponent<HorizontalCauseProjectileLogic>().playerTransform = playerTransform;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision) {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
-            playerInRange = true;
-            arenaParticles.Play();
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
-            playerInRange = false;
-            attackCooldown = 2f;
-            arenaParticles.Stop();
-        }
+        projectile.GetComponent<SnowballLogic>().playerTransform = playerTransform;
     }
 }

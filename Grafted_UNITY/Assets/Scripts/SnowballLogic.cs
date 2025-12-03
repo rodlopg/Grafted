@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 
-public class HorizontalCauseProjectileLogic : MonoBehaviour, IDamageable {
+public class SnowballLogic : MonoBehaviour, IDamageable {
     public Transform playerTransform;
 
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private AudioSource audioSource;
 
     private float projectileSpeed = 8f;
-    private float projectileDamage = 0.4f;
+    private float projectileDamage = 0.1f;
     private float projectileHealth;
 
     private void Start() {
@@ -18,11 +19,12 @@ public class HorizontalCauseProjectileLogic : MonoBehaviour, IDamageable {
             Vector3 pos = transform.position;
             pos.y = playerTransform.position.y;
             transform.position = pos;
+            audioSource.Play();
         }
     }
 
     private void Update() {
-        transform.position += Vector3.right * projectileSpeed * Time.deltaTime;
+        transform.position += Vector3.left * projectileSpeed * Time.deltaTime;
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {

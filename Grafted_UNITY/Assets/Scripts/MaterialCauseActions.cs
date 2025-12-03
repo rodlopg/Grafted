@@ -14,6 +14,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     [SerializeField] private LayerMask playerLayer;
     [SerializeField] private Transform projectileSpawnLocation;
     [SerializeField] private Animator enemyAnimator;
+    [SerializeField] private AudioClip efficientAreaMusic;
 
     // Boss stats
     public float health { get; private set; }
@@ -22,7 +23,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     public static event EventHandler onBossHitUI;
     public static event EventHandler onBossDeathUI;
 
-    private bool playerInRange = false;
+    public bool playerInRange = false;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 
     public void death() {
         SpawnBodyPart.SpawnRandomBodyPart(gameObject.transform.position);
+        SoundManager.Instance.changeMusic(efficientAreaMusic);
         Destroy(gameObject);
     }
 
@@ -60,23 +62,5 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     private void projectileAttack() {
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawnLocation.position, projectileSpawnLocation.rotation);
         projectile.GetComponent<MaterialCauseProjectileLogic>().playerTransform = playerTransform;
-    }
-
-    // For detection that the player is within the boss arena
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
-        {
-            playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (((1 << collision.gameObject.layer) & playerLayer) != 0)
-        {
-            playerInRange = false;
-            attackCooldown = 2f;
-        }
     }
 }
