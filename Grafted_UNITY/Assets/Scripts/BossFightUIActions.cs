@@ -33,6 +33,15 @@ public class BossFightUIActions : MonoBehaviour
         PlayerInteractions.onPlayerHitUI += PlayerInteractions_onPlayerHitUI;
         MaterialCauseActions.onBossHitUI += MaterialCauseActions_onBossHitUI;
         PlayerState.onBodyPartDetection += PlayerState_onBodyPartDetection;
+        PlayerInteractions.onPlayerHealUI += PlayerInteractions_onPlayerHealUI;
+    }
+
+    private void PlayerInteractions_onPlayerHealUI(object sender, System.EventArgs e)
+    {
+        PlayerInteractions player = (PlayerInteractions)sender;
+        float playerHealth = player.health;
+
+        playerHealthBar.fillAmount = playerHealth;
     }
 
     // Adjust the boss health bar in the UI

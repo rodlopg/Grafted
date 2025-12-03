@@ -170,6 +170,24 @@ public class PlayerState : MonoBehaviour
             onBodyPartDetection?.Invoke(this, new BodyPartEventArgs(part.GetSlot()));
             Debug.Log($"Detected body part: {part.GetSlot()}");
         }
+
+        // -------------------------------
+        // Health Flame Pickup
+        // -------------------------------
+        if (collision.CompareTag("Health_Flame"))
+        {
+            // Heal 5% of the player's max health
+            float maxHP = P_Interactions.getMaxHealth();
+            float healAmount = maxHP * 0.5f;
+
+            P_Interactions.heal(healAmount);  // Make sure this clamps the health internally.
+                                              // If not, I can write a clamp here for you.
+
+            // Remove the flame
+            Destroy(collision.gameObject);
+
+            Debug.Log("Picked up Health Flame (+5% HP)");
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

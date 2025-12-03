@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
 
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private float maxHealth = 1f;
 
     [SerializeField] private Transform attackTransform;
     [SerializeField] private float attackRange = 1f;
@@ -31,10 +33,12 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
     public static event EventHandler onPlayerHitUI;
     public static event EventHandler onPlayerSpeedChange;
     public static event EventHandler onPlayerStrengthChange;
+    public static event EventHandler onPlayerHealUI;
+
 
     void Start()
     {
-        health = 1f;
+        health = maxHealth;
     }
 
     void Update()
@@ -108,5 +112,17 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
         onPlayerStrengthChange?.Invoke(this, EventArgs.Empty);
     }
 
+    public float getMaxHealth()
+    {
+        return this.maxHealth;
+    }
+
+    public void heal(float f)
+    {
+        this.health += f;
+        if (this.health > this.getMaxHealth()) this.health = this.getMaxHealth();
+        if(this.health < 0) this.health = 0;
+        onPlayerHealUI?.Invoke(this, EventArgs.Empty);
+    }
 
 }
