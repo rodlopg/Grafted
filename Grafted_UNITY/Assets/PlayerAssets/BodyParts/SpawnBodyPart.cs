@@ -5,14 +5,17 @@ public class SpawnBodyPart : MonoBehaviour
 {
     [Header("Assign your Scriptable_BodyPart assets here")]
     [SerializeField] private List<Scriptable_BodyPart> bodyPartAssets = new List<Scriptable_BodyPart>();
+    [SerializeField] private List<Scriptable_BodyPart> BOSS_bodyPartAssets = new List<Scriptable_BodyPart>();
 
     // Static list to track available parts across the game
     private static List<Scriptable_BodyPart> availableParts;
+    private static List<Scriptable_BodyPart> BOSS_availableParts;
 
     private void Awake()
     {
         // Copy the serialized list into the static one
         availableParts = new List<Scriptable_BodyPart>(bodyPartAssets);
+        BOSS_availableParts = new List<Scriptable_BodyPart>(BOSS_bodyPartAssets);
 
         Debug.Log($"✅ Loaded {availableParts.Count} body parts from Inspector.");
     }
@@ -49,8 +52,42 @@ public class SpawnBodyPart : MonoBehaviour
         return newPart;
     }
 
+    public static GameObject BOSS_SpawnRandomBodyPart(Vector3 position)
+    {
+        if (BOSS_availableParts == null || BOSS_availableParts.Count == 0)
+        {
+            Debug.LogWarning("⚠️ No available body parts to spawn!");
+            return null;
+        }
+
+        // Pick a random index
+        int randomIndex = Random.Range(0, BOSS_availableParts.Count);
+        Scriptable_BodyPart chosenPart = BOSS_availableParts[randomIndex];
+
+        // Check prefab assignment
+        if (chosenPart == null || chosenPart.GetPrefab() == null)
+        {
+            Debug.LogWarning($"⚠️ Scriptable_BodyPart '{chosenPart?.name}' has no prefab assigned.");
+            return null;
+        }
+
+        // Instantiate prefab at the given position
+        GameObject newPart = Instantiate(chosenPart.GetPrefab(), position, Quaternion.identity);
+        Debug.Log($"🧠 Spawned '{newPart.name}' at {position}");
+
+        // Remove it from the list so it won’t be spawned again
+        BOSS_availableParts.RemoveAt(randomIndex);
+
+        return newPart;
+    }
+
     public static List<Scriptable_BodyPart> GetScriptable_BodyParts()
     {
         return availableParts;
+    }
+
+    public static List<Scriptable_BodyPart> boss_GetScriptable_BodyParts()
+    {
+        return BOSS_availableParts;
     }
 }

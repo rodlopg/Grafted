@@ -53,7 +53,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
     }
 
     public void death() {
-        SpawnBodyPart.SpawnRandomBodyPart(gameObject.transform.position);
+        SpawnBodyPart.BOSS_SpawnRandomBodyPart(gameObject.transform.position);
         SoundManager.Instance.changeMusic(efficientAreaMusic);
         Destroy(gameObject);
     }
