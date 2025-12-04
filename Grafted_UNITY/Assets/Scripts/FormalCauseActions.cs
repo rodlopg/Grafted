@@ -24,7 +24,7 @@ public class FormalCauseActions : MonoBehaviour, IDamageable {
     public bool playerInRange = false;
 
     void Start() {
-        health = 2.5f;
+        health = 0.2f;
         stopParticleSystem();
     }
 

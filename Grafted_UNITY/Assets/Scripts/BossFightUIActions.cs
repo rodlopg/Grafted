@@ -36,6 +36,13 @@ public class BossFightUIActions : MonoBehaviour
         PlayerInteractions.onPlayerHealUI += PlayerInteractions_onPlayerHealUI;
     }
 
+    void OnDestroy() {
+        PlayerInteractions.onPlayerHitUI -= PlayerInteractions_onPlayerHitUI;
+        MaterialCauseActions.onBossHitUI -= MaterialCauseActions_onBossHitUI;
+        PlayerState.onBodyPartDetection -= PlayerState_onBodyPartDetection;
+        PlayerInteractions.onPlayerHealUI -= PlayerInteractions_onPlayerHealUI;
+    }
+
     private void PlayerInteractions_onPlayerHealUI(object sender, System.EventArgs e)
     {
         PlayerInteractions player = (PlayerInteractions)sender;

@@ -98,7 +98,7 @@ public class PlayerInteractions : MonoBehaviour, IDamageable
     }
 
     public void death() {
-        Destroy(gameObject);
+        SceneChanger.Instance.ChangeScene(SceneChanger.SceneType.DeathScreen);
     }
 
     public void changeSpeed(float speed) { 

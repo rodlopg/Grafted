@@ -27,7 +27,7 @@ public class MaterialCauseActions : MonoBehaviour, IDamageable
 
     void Start()
     {
-        health = 1f;
+        health = 0.1f;
     }
 
     // Projectile attack every 3 seconds

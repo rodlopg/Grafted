@@ -31,7 +31,7 @@ public class MaterialCauseProjectileLogic : MonoBehaviour, IDamageable
         if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
             PlayerInteractions playerInteraction = collision.gameObject.GetComponent<PlayerInteractions>();
             playerInteraction.takeDamage(projectileDamage);
-            Destroy(gameObject);
+            death();
         }
     }
 

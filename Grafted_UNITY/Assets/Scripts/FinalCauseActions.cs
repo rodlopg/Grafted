@@ -24,7 +24,7 @@ public class FinalCauseActions : MonoBehaviour, IDamageable {
     public bool playerInRange = false;
 
     void Start() {
-        health = 2.5f;
+        health = 0.4f;
         stopParticleSystem();
     }
 
@@ -50,8 +50,8 @@ public class FinalCauseActions : MonoBehaviour, IDamageable {
 
     public void death() {
         SpawnBodyPart.SpawnRandomBodyPart(transform.position);
+        SceneChanger.Instance.ChangeScene(SceneChanger.SceneType.VictoryScreen);
         SoundManager.Instance.changeMusic(endingMusic);
-        Destroy(gameObject);
     }
 
     // Shoots 3 prelocated lightning bolts

@@ -24,7 +24,7 @@ public class EfficientCauseActions : MonoBehaviour, IDamageable {
     public bool playerInRange = false;
 
     void Start() {
-        health = 2f;
+        health = 0.2f;
         stopParticleSystem();
     }
 

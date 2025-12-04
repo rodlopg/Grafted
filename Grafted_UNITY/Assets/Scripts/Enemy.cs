@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float health;
     [SerializeField] private float attackPower;
     [SerializeField] private float attackCooldown = 1f;
+    private float attackCooldownTimer;
     [SerializeField] private float roamSpeed;
     [SerializeField] float roamChangeTimer = 2f;
     [SerializeField] int roamDirection = 1;
@@ -24,34 +25,30 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool isFacingRight = true;
     private bool canAttack = true;
 
-    void Update()
-    {
+    void Update() {
         if (!canAttack) {
-            attackCooldown -= Time.deltaTime;
-            if (attackCooldown <= 0) {
+            attackCooldownTimer -= Time.deltaTime;
+            if (attackCooldownTimer <= 0)
                 canAttack = true;
-                attackCooldown = 1f;
-            }
         }
 
-        if (playerInRange) {
+        if (playerInRange)
             lineOfSight();
-        }
 
-        if (canSeePlayer) {
+        if (canSeePlayer)
             chasePlayer();
-        } else {
+        else
             roamMovement();
-        }
     }
 
     // To damage the player we use Collision
-    private void OnCollisionStay2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (((1 << collision.gameObject.layer) & playerLayer) != 0) {
             if (canAttack) {
-                PlayerInteractions playerInteraction = collision.gameObject.GetComponent<PlayerInteractions>();
-                playerInteraction.takeDamage(attackPower);
+                PlayerInteractions p = collision.gameObject.GetComponent<PlayerInteractions>();
+                p.takeDamage(attackPower);
                 canAttack = false;
+                attackCooldownTimer = attackCooldown;
             }
         }
     }
