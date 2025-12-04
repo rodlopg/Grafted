@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Shooter 02
-  health: 0.2
-  attackPower: 0.05
+  health: 0.03
+  attackPower: 0.03
   attackCooldown: 1
   roamSpeed: 1
   roamChangeTimer: 1

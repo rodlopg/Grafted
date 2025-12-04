@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Unstable_Platform_Script : MonoBehaviour
 {
     [Header("Platform Settings")]
-    [SerializeField] private float countDownTime = 3f;
+    [SerializeField] private float countDownTime = 1f; // Time before platform disappears
+    [SerializeField] private float respawnTime = 1f; // Time until platform reappears
     private float countDown;
+
+    [Header("Platform Reference")]
+    [Tooltip("Drag the child platform GameObject here (the one with sprite/collider/animator)")]
+    [SerializeField] private GameObject platformObject;
 
     [Header("Animation Settings")]
     [SerializeField] private Animator platformAnimator;
@@ -15,16 +21,25 @@ public class Unstable_Platform_Script : MonoBehaviour
     [SerializeField] private ParticleSystem dustRespawn;
     [SerializeField] private LayerMask playerLayer;
 
-    private SpriteRenderer spriteRenderer;
-    private Collider2D col;
-
+    private Collider2D platformCollider;
+    private SpriteRenderer[] platformSprites; // All sprites in platform hierarchy
     private bool isCounting = false;
     private bool shakePlayed = false;
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        col = GetComponent<Collider2D>();
+        // Auto-find platform if not assigned
+        if (platformObject == null && transform.childCount > 0)
+        {
+            platformObject = transform.GetChild(0).gameObject;
+        }
+
+        // Get all sprite renderers in platform and its children
+        if (platformObject != null)
+        {
+            platformSprites = platformObject.GetComponentsInChildren<SpriteRenderer>();
+            platformCollider = platformObject.GetComponent<Collider2D>();
+        }
     }
 
     private void Start()
@@ -50,14 +65,17 @@ public class Unstable_Platform_Script : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator StartCountdown()
+    private IEnumerator StartCountdown()
     {
         isCounting = true;
         shakePlayed = false;
 
         // Reset to idle
-        platformAnimator.ResetTrigger("Shake");
-        platformAnimator.SetTrigger("IDLE");
+        if (platformAnimator)
+        {
+            platformAnimator.ResetTrigger("Shake");
+            platformAnimator.SetTrigger("IDLE");
+        }
 
         countDown = countDownTime;
 
@@ -65,7 +83,7 @@ public class Unstable_Platform_Script : MonoBehaviour
         {
             float shakeThreshold = countDownTime / (float)AnimationDenominator;
 
-            if (!shakePlayed && countDown <= shakeThreshold)
+            if (!shakePlayed && countDown <= shakeThreshold && platformAnimator)
             {
                 shakePlayed = true;
                 platformAnimator.SetTrigger("Shake");
@@ -75,32 +93,53 @@ public class Unstable_Platform_Script : MonoBehaviour
             countDown -= 1f;
         }
 
+        // Collapse platform
         CollapsePlatform();
 
-        // Wait before respawn
-        yield return new WaitForSeconds(countDownTime);
+        // Wait for respawn time
+        yield return new WaitForSeconds(respawnTime);
 
+        // Restore platform
         RestorePlatform();
         ResetPlatform();
     }
 
     private void CollapsePlatform()
     {
-        // Play particles
+        // Play collapse particles
         if (dustCollapse) dustCollapse.Play();
 
-        // Disable platform
-        col.enabled = false;
-        spriteRenderer.enabled = false;
+        // Disable all sprites in the platform hierarchy
+        if (platformSprites != null)
+        {
+            foreach (SpriteRenderer sprite in platformSprites)
+            {
+                if (sprite != null)
+                    sprite.enabled = false;
+            }
+        }
+
+        // Disable platform collider
+        if (platformCollider) platformCollider.enabled = false;
     }
 
     private void RestorePlatform()
     {
+        // Enable platform collider
+        if (platformCollider) platformCollider.enabled = true;
+
+        // Enable all sprites in the platform hierarchy
+        if (platformSprites != null)
+        {
+            foreach (SpriteRenderer sprite in platformSprites)
+            {
+                if (sprite != null)
+                    sprite.enabled = true;
+            }
+        }
+
         // Play respawn particles
         if (dustRespawn) dustRespawn.Play();
-
-        col.enabled = true;
-        spriteRenderer.enabled = true;
     }
 
     private void ResetPlatform()
@@ -109,7 +148,21 @@ public class Unstable_Platform_Script : MonoBehaviour
         shakePlayed = false;
         isCounting = false;
 
-        platformAnimator.ResetTrigger("Shake");
-        platformAnimator.SetTrigger("IDLE");
+        // Make sure platform is visible
+        if (platformCollider) platformCollider.enabled = true;
+        if (platformSprites != null)
+        {
+            foreach (SpriteRenderer sprite in platformSprites)
+            {
+                if (sprite != null)
+                    sprite.enabled = true;
+            }
+        }
+
+        if (platformAnimator)
+        {
+            platformAnimator.ResetTrigger("Shake");
+            platformAnimator.SetTrigger("IDLE");
+        }
     }
 }

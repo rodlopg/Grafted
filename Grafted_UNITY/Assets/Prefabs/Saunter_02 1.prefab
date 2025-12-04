@@ -72,8 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyName: Saunter
-  health: 0.1
-  attackPower: 0.05
+  health: 0.01
+  attackPower: 0.01
   attackCooldown: 1
   roamSpeed: 1
   roamChangeTimer: 2
